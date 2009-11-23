@@ -6,8 +6,7 @@ class Itunes_parser
   @lib = ItunesParser::Library.new
 
   # @result is a hash
-  @result = @lib.parse(File.read('.../test/test_library.xml'))
-  #@result = @lib.parse(File.read(File.dirname(__FILE__) + 'test_library.xml'))
+  @result = @lib.parse(File.read(File.dirname(__FILE__) + './test/test_library.xml'))
   puts @result.inspect
   
   puts @result['first_song'].inspect
