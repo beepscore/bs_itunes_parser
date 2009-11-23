@@ -34,7 +34,6 @@ module ItunesParser
         song_info
       end
 
-
       all_songs = doc.xpath('/plist/dict/dict/dict')
 
       # In results hash, set key 'songs' to empty array.  Ref Thomas pg 46        
