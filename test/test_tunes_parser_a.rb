@@ -16,9 +16,6 @@ class TestTunesParserA < Test::Unit::TestCase
       assert_instance_of(ItunesParser::TunesParserA, @my_itunes_parser)
     end
 
-    # should "probably rename this file and start testing for real" do
-    #   flunk "hey buddy, you should probably rename this file and start testing for real"
-    # end
   end
 
 end
