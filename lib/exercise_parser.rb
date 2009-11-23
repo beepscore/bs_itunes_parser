@@ -1,10 +1,10 @@
-require 'itunes_parser'
+require 'tunes_parser_a'
 
-class Exercise_parser
+class ExerciseParser
 
   itunes_xml_file_name = File.dirname(__FILE__) + './test/test_library.xml'
   
-  my_itunes_parser = ItunesParser::Itunes_parser.new(itunes_xml_file_name)
+  my_itunes_parser = ItunesParser::TunesParserA.new(itunes_xml_file_name)
 
   my_itunes_parser.list_summary
   my_itunes_parser.list_first_song

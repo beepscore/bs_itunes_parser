@@ -3,7 +3,7 @@ require 'library'
 
 module ItunesParser
 
-  class Itunes_parser
+  class TunesParserA
 
     def initialize(itunes_xml_file_name)   
       @lib = ItunesParser::Library.new    
