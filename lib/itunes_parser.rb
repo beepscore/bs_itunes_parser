@@ -19,6 +19,7 @@ module ItunesParser
 
     def list_first_song
       puts @parsed_lib['first_song'].inspect
+      puts "first song object #{@parsed_lib['first_song']}"
       puts "first song's name #{@parsed_lib['first_song']['name']}"
       puts "first song's artist #{@parsed_lib['first_song']['artist']}"
       puts "first song's year #{@parsed_lib['first_song']['year']}"
@@ -29,6 +30,11 @@ module ItunesParser
       puts "first song's sample rate #{@parsed_lib['first_song']['sample rate']} Hz"
       puts "first song's total time #{@parsed_lib['first_song']['total time']} millisec"
     end
+
+    def list_song(song_index)
+      puts "songs[#{song_index}] = #{@parsed_lib['songs'][song_index].inspect}"
+    end
+
 
     def populate_metadata 
       @parsed_lib['songs'].each do |song|

@@ -1,3 +1,5 @@
+# in Terminal, open main project folder (e.g. bs_itunes_parser), then run autotest.
+
 require 'helper'
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 require 'library'
@@ -12,7 +14,7 @@ class TestLibrary < Test::Unit::TestCase
   context "#parse" do
     setup do
       @lib = ItunesParser::Library.new
-      @result = @lib.parse(File.read('test_library.xml'))
+      @result = @lib.parse(File.read('test/test_library.xml'))
     end
 
     should "return a Hash" do

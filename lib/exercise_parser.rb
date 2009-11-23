@@ -8,6 +8,9 @@ class Exercise_parser
 
   my_itunes_parser.list_summary
   my_itunes_parser.list_first_song
-  my_itunes_parser.populate_metadata
+  my_itunes_parser.list_song(0)
+  my_itunes_parser.list_song(1)    
+  my_itunes_parser.list_song(2)  
+  #my_itunes_parser.populate_metadata
 
 end
