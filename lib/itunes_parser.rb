@@ -3,11 +3,12 @@ require 'library'
 
 class Itunes_parser
 
-  def initialize
-    @lib = ItunesParser::Library.new
+  def initialize(itunes_xml_file_name)
     
+    @lib = ItunesParser::Library.new    
     # @parsed_lib is a hash
-    @parsed_lib = @lib.parse(File.read(File.dirname(__FILE__) + './test/test_library.xml'))
+    # @parsed_lib = @lib.parse(File.read(File.dirname(__FILE__) + './test/test_library.xml'))
+    @parsed_lib = @lib.parse(File.read(itunes_xml_file_name))
     #puts @parsed_lib.inspect
     
   end
