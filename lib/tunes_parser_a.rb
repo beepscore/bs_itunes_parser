@@ -9,13 +9,17 @@ module ItunesParser
       @lib = ItunesParser::Library.new    
       # @parsed_lib is a hash
       @parsed_lib = @lib.parse(File.read(itunes_xml_file_name))
-      #puts @parsed_lib.inspect   
+      #puts @parsed_lib.inspect
+    end
+    
+    def song_count
+      @song_count = @parsed_lib['songs'].count
     end
 
-    def list_summary  
+    def list_summary
       puts "library version #{@parsed_lib['version']}"
-      puts "number of songs #{@parsed_lib['songs'].count}"
-    end
+      puts "number of songs #{self.song_count}"
+    end    
 
     def list_first_song
       puts @parsed_lib['first_song'].inspect
