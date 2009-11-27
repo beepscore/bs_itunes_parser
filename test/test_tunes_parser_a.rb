@@ -14,23 +14,44 @@ class TestTunesParserA < Test::Unit::TestCase
       @my_tunes_parser_a = ItunesParser::TunesParserA.new(itunes_xml_file_name)
     end
     
-    should "list a summary" do
+    should "01 list a summary" do
       puts "test- list a summary"
       assert_nil(@my_tunes_parser_a.list_summary)
       puts ""
     end
     
-    should "return a TunesParserA" do
+    should "02 return a TunesParserA" do
       puts "test- return a TunesParserA"
       assert_instance_of(ItunesParser::TunesParserA, @my_tunes_parser_a)
       puts ""
     end
     
-    should "return the number of songs" do
+    should "03 return the number of songs" do
       puts "test- return the number of songs"
       assert_equal(1786, @my_tunes_parser_a.song_count)
       puts ""
     end
+
+    should "04 list first song" do
+      puts "test- list first song"
+      assert_nil(@my_tunes_parser_a.list_first_song)
+      puts ""
+    end
+
+    should "05 list a song" do
+      puts "test- list a song"
+      assert_nil(@my_tunes_parser_a.list_song(0))
+      assert_nil(@my_tunes_parser_a.list_song(1))
+      assert_nil(@my_tunes_parser_a.list_song(2))
+      puts ""
+    end
+    
+    should "06 populate metadata" do
+      puts "test- populate metadata"
+      assert_nil(@my_tunes_parser_a.populate_metadata)
+      puts ""
+    end
+    
 
   end
 

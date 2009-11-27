@@ -1,5 +1,7 @@
 require 'rubygems'
 require 'library'
+require 'active_support'
+require 'nokogiri'
 
 module ItunesParser
 
@@ -11,7 +13,7 @@ module ItunesParser
       @parsed_lib = @lib.parse(File.read(itunes_xml_file_name))
       #puts @parsed_lib.inspect
     end
-    
+
     def song_count
       @song_count = @parsed_lib['songs'].count
     end
@@ -39,18 +41,32 @@ module ItunesParser
       puts "songs[#{song_index}] = #{@parsed_lib['songs'][song_index].inspect}"
     end
 
-
-    def populate_metadata 
+    def list_songs 
       @parsed_lib['songs'].each do |song|
         puts song
-
         # song('/key').each do |key|
         #   song.metadata[key.content.downcase.underscore] = key.next.content
-        # end
+        # end 
+      end
+    end
 
-      end 
+    def populate_metadata 
+      puts @parsed_lib['songs'][0]
+      # @parsed_lib['songs'][0]('/key').each do |key|
+      #    metadata[key.content.downcase.underscore] = key.next.content
+      #  end
+
+      # add key-value pair to results hash.  Ref Thomas pg 46
+      current_song = @parsed_lib['songs'][0]
+      # inject method Ref Thomas pg 52-53
+      current_song.inject({}) do |song_info, key|
+        # add key-value pair to song_info hash.
+        song_info[key.content.downcase.underscore] = key.next.content
+        song_info
+      end
 
     end
 
   end
+
 end
