@@ -14,15 +14,15 @@ class TestTunesParserA < Test::Unit::TestCase
       @my_tunes_parser_a = ItunesParser::TunesParserA.new(itunes_xml_file_name)
     end
     
-    should "01 list a summary" do
-      puts "test- list a summary"
-      assert_nil(@my_tunes_parser_a.list_summary)
+    should "01 return a TunesParserA" do
+      puts "test- return a TunesParserA"
+      assert_instance_of(ItunesParser::TunesParserA, @my_tunes_parser_a)
       puts ""
     end
     
-    should "02 return a TunesParserA" do
-      puts "test- return a TunesParserA"
-      assert_instance_of(ItunesParser::TunesParserA, @my_tunes_parser_a)
+    should "02 list a summary" do
+      puts "test- list a summary"
+      assert_nil(@my_tunes_parser_a.list_summary)
       puts ""
     end
     
@@ -33,25 +33,32 @@ class TestTunesParserA < Test::Unit::TestCase
     end
     
     should "04 list first song" do
-      puts "test- list first song"
-      assert_nil(@my_tunes_parser_a.list_first_song)
+       puts "test- list first song"
+       assert_nil(@my_tunes_parser_a.list_first_song)
+       puts ""
+     end
+    
+    should "05 last song not nil, song after last is nil" do
+      puts "test- last song not nil, song after last is nil"
+      index_of_last_song = @my_tunes_parser_a.song_count - 1
+      
       puts ""
-    end
-
-    should "05 list a song" do
-      puts "test- list a song"
-      assert_nil(@my_tunes_parser_a.list_song(0))
-      assert_nil(@my_tunes_parser_a.list_song(1))
-      assert_nil(@my_tunes_parser_a.list_song(2))
+      last_song = @my_tunes_parser_a.parsed_lib['songs'][index_of_last_song]
+      puts "last song = #{last_song.inspect}"
+      assert_not_nil(last_song)
+      puts ""
+      
+      after_last_song = @my_tunes_parser_a.parsed_lib['songs'][index_of_last_song +1]
+      puts "after last song = #{after_last_song.inspect}"
+      assert_nil(after_last_song)
       puts ""
     end
     
-    should "06 populate metadata" do
-      puts "test- populate metadata"
-      assert_nil(@my_tunes_parser_a.populate_metadata)
-      puts ""
-    end
-    
+    # should "06 list songs" do
+    #    puts "test- list songs"
+    #    assert_nil(@my_tunes_parser_a.list_songs)
+    #    puts ""
+    #  end    
 
   end
 
