@@ -6,7 +6,7 @@ require 'nokogiri'
 module ItunesParser
 
   class TunesParserA
-    
+
     # parsed_lib is a hash
     attr_accessor :parsed_lib
 
@@ -43,11 +43,11 @@ module ItunesParser
     end
 
     def list_songs 
-      @parsed_lib['songs'].each do |song|
-        puts song.inspect
+      parsed_lib['songs'].each do |song|
+        puts "track id = #{song.metadata['track id']}  name = #{song.metadata['name']}"
       end
     end
-    
+
   end
 
 end

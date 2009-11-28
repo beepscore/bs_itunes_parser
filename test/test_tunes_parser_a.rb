@@ -34,7 +34,15 @@ class TestTunesParserA < Test::Unit::TestCase
     
     should "04 list first song" do
        puts "test- list first song"
-       assert_nil(@my_tunes_parser_a.list_first_song)
+       # first song in the songs array
+       first_song_in_songs = @my_tunes_parser_a.parsed_lib['songs'][0]
+       puts "first song = #{first_song_in_songs.inspect}"       
+       assert_not_nil(first_song_in_songs)
+       puts ""
+       
+       # first_song in hash, also used in list_first_song method
+       @my_tunes_parser_a.list_first_song
+       assert_not_nil(@my_tunes_parser_a.parsed_lib['first_song'])      
        puts ""
      end
     
@@ -54,11 +62,12 @@ class TestTunesParserA < Test::Unit::TestCase
       puts ""
     end
     
-    # should "06 list songs" do
-    #    puts "test- list songs"
-    #    assert_nil(@my_tunes_parser_a.list_songs)
-    #    puts ""
-    #  end    
+    should "06 list songs" do
+       puts "test- list songs"
+       @my_tunes_parser_a.list_songs
+       assert_not_nil(true)
+       puts ""
+     end    
 
   end
 
