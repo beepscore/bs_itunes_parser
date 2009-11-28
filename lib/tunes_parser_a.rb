@@ -11,7 +11,6 @@ module ItunesParser
       @lib = ItunesParser::Library.new    
       # @parsed_lib is a hash
       @parsed_lib = @lib.parse(File.read(itunes_xml_file_name))
-      #puts @parsed_lib.inspect
     end
 
     def song_count
@@ -51,19 +50,19 @@ module ItunesParser
     end
 
     def populate_metadata 
-      puts @parsed_lib['songs'][0]
+      # puts @parsed_lib['songs'][0]
       # @parsed_lib['songs'][0]('/key').each do |key|
       #    metadata[key.content.downcase.underscore] = key.next.content
       #  end
 
       # add key-value pair to results hash.  Ref Thomas pg 46
-      current_song = @parsed_lib['songs'][0]
+      # current_song = @parsed_lib['songs'][0]
       # inject method Ref Thomas pg 52-53
-      current_song.inject({}) do |song_info, key|
+      # current_song.inject({}) do |song_info, key|
         # add key-value pair to song_info hash.
-        song_info[key.content.downcase.underscore] = key.next.content
-        song_info
-      end
+      #   song_info[key.content.downcase.underscore] = key.next.content
+      #   song_info
+      # end
 
     end
 

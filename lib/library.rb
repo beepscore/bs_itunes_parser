@@ -40,14 +40,14 @@ module ItunesParser
       results['songs'] = []
 
       all_songs.each do |track|
-
+        
         metadata = {}
         song = Song.new
-
-        track.xpath('/key').each do |key|
+        
+        track.xpath('./key').each do |key|
           song.metadata[key.content.downcase.underscore] = key.next.content
         end
-
+        
         # The results hash 'songs' key has an array for its value.  Append song to the array.
         results['songs'] << song
       end
