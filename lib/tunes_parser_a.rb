@@ -56,6 +56,11 @@ module ItunesParser
       end
       songs_for_key_value
     end
+
+    def count_unique_values_for_key(a_key)
+      99
+    end
+
    
   end
 

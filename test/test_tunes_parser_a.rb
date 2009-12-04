@@ -79,10 +79,15 @@ class TestTunesParserA < Test::Unit::TestCase
       assert_equal(8, result.count)
     end
 
-    should "11 find songs for key value" do
+    should "12 find songs for key value" do
       puts "test- find songs for key value"
       assert_equal(8, @my_tunes_parser_a.find_songs_for_key_value('artist', 'Cause4Concern').count)
       assert_equal(41, @my_tunes_parser_a.find_songs_for_key_value('year', '2001').count)
+    end
+
+    should "13 count unique values for key" do
+      puts "test- count unique values for key"
+      assert_equal(99, @my_tunes_parser_a.count_unique_values_for_key('artist'))
     end
 
   end
