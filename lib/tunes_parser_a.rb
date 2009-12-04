@@ -39,7 +39,7 @@ module ItunesParser
 
     def list_songs 
       parsed_lib['songs'].each do |song|
-        song.list_song_simple
+        song.to_s_simple
       end
     end
  

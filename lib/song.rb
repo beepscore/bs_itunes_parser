@@ -6,7 +6,7 @@ module ItunesParser
       @metadata = {}
     end
     
-    def list_song_simple
+    def to_s_simple
         puts "track id = #{@metadata['track id']}  name = #{@metadata['name']}"
     end
     

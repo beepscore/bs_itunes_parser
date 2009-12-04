@@ -74,7 +74,7 @@ class TestTunesParserA < Test::Unit::TestCase
       puts "test- find songs for artist"
       result = @my_tunes_parser_a.find_songs_for_artist
       result.each do |song|
-        song.list_song_simple
+        song.to_s_simple
       end
       assert_equal(8, result.count)
     end
