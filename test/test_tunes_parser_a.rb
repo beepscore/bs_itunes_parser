@@ -13,61 +13,71 @@ class TestTunesParserA < Test::Unit::TestCase
       itunes_xml_file_name = './test/test_library.xml'
       @my_tunes_parser_a = ItunesParser::TunesParserA.new(itunes_xml_file_name)
     end
-    
+
     should "01 return a TunesParserA" do
       puts "test- return a TunesParserA"
-      assert_instance_of(ItunesParser::TunesParserA, @my_tunes_parser_a)
       puts ""
+      assert_instance_of(ItunesParser::TunesParserA, @my_tunes_parser_a)
     end
-    
+
     should "02 list a summary" do
       puts "test- list a summary"
-      assert_nil(@my_tunes_parser_a.list_summary)
       puts ""
+      assert_nil(@my_tunes_parser_a.list_summary)
     end
-    
+
     should "03 return the number of songs" do
       puts "test- return the number of songs"
+      puts ""
       assert_equal(1786, @my_tunes_parser_a.song_count)
-      puts ""
     end
-    
-    should "04 list first song" do
-       puts "test- list first song"
-       # first song in the songs array
-       first_song_in_songs = @my_tunes_parser_a.parsed_lib['songs'][0]
-       puts "first song = #{first_song_in_songs.inspect}"       
-       assert_not_nil(first_song_in_songs)
-       puts ""
-       
-       # first_song in hash, also used in list_first_song method
-       @my_tunes_parser_a.list_first_song
-       assert_not_nil(@my_tunes_parser_a.parsed_lib['first_song'])      
-       puts ""
-     end
-    
-    should "05 last song not nil, song after last is nil" do
-      puts "test- last song not nil, song after last is nil"
-      index_of_last_song = @my_tunes_parser_a.song_count - 1
-      
+
+    should "04 provide correct metadata values" do
+      puts "test- provide correct metadata values"
+      # first song in the songs array
+      first_song_in_songs = @my_tunes_parser_a.parsed_lib['songs'][0]
+      puts "first song in songs = #{first_song_in_songs.inspect}"
+      puts "" 
+      assert_instance_of(ItunesParser::Song, first_song_in_songs)
+      assert_equal("Dan Sartain", first_song_in_songs.metadata['artist'])
+      assert_equal("Totem Pole", first_song_in_songs.metadata['name'])
+      assert_equal("2006", first_song_in_songs.metadata['year'])
+      assert_equal("MPEG audio file", first_song_in_songs.metadata['kind'])
+      # size in bytes
+      assert_equal("5191680", first_song_in_songs.metadata['size'])
+      # sample rate in Hz
+      assert_equal("44100", first_song_in_songs.metadata['sample rate'])
+      # total time in msec
+      assert_equal("180035", first_song_in_songs.metadata['total time'])
+
+      # "first_song" in hash is a hash
+      assert_instance_of(Hash, @my_tunes_parser_a.parsed_lib['first_song'])      
+    end
+
+    should "05 last song is a song" do
+      puts "test- last song is a song"
       puts ""
+      index_of_last_song = (@my_tunes_parser_a.song_count - 1)
       last_song = @my_tunes_parser_a.parsed_lib['songs'][index_of_last_song]
       puts "last song = #{last_song.inspect}"
-      assert_not_nil(last_song)
-      puts ""
-      
-      after_last_song = @my_tunes_parser_a.parsed_lib['songs'][index_of_last_song +1]
-      puts "after last song = #{after_last_song.inspect}"
-      assert_nil(after_last_song)
-      puts ""
+      assert_instance_of(ItunesParser::Song, last_song)
     end
-    
-    should "06 list songs" do
-       puts "test- list songs"
-       @my_tunes_parser_a.list_songs
-       assert_not_nil(true)
-       puts ""
-     end    
+
+    # should "06 list songs" do
+    #   puts "test- list songs"
+    #   @my_tunes_parser_a.list_songs
+    #   assert_not_nil(true)
+    #   puts ""
+    # end 
+
+    should "11 find songs for artist" do
+      puts "test- find songs for artist"
+      result = @my_tunes_parser_a.find_songs_for_artist
+      result.each do |song|
+        song.list_song_simple
+      end
+      assert_equal(8, result.count)
+    end
 
   end
 
