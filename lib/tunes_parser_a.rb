@@ -50,11 +50,11 @@ module ItunesParser
       songs_for_artist
     end
     
-    def find_songs_for_key_value
-      songs_for_artist = parsed_lib['songs'].find_all do |song|
-        song.metadata['artist']=='Cause4Concern'
+    def find_songs_for_key_value(a_key, a_value)
+      songs_for_key_value = parsed_lib['songs'].find_all do |song|
+        song.metadata[a_key]== a_value
       end
-      songs_for_artist
+      songs_for_key_value
     end
    
   end
