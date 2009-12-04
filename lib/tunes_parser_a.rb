@@ -58,9 +58,13 @@ module ItunesParser
     end
 
     def count_unique_values_for_key(a_key)
-      99
+      values_array = [] #array of values
+      parsed_lib['songs'].each do |song|
+        values_array << song.metadata[a_key]
+      end
+      puts values_array.uniq.count
+      values_array.uniq.count
     end
-
    
   end
 

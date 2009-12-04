@@ -87,7 +87,9 @@ class TestTunesParserA < Test::Unit::TestCase
 
     should "13 count unique values for key" do
       puts "test- count unique values for key"
-      assert_equal(99, @my_tunes_parser_a.count_unique_values_for_key('artist'))
+      assert_equal(237, @my_tunes_parser_a.count_unique_values_for_key('artist'))
+      assert_equal(1786, @my_tunes_parser_a.count_unique_values_for_key('track id'))
+      assert_equal(227, @my_tunes_parser_a.count_unique_values_for_key('album'))
     end
 
   end
