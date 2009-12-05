@@ -105,11 +105,12 @@ class TestTunesParserA < Test::Unit::TestCase
 
     should "15 return library songs time components" do
       puts "test- library songs time components"
-      #  this answer seems about double expected.  are we double counting due to albums?
+      #  TODO: this answer seems about double expected.
+      #  are we double counting due to albums?  Duplicate songs with different sample rates?
       assert_equal(10, @my_tunes_parser_a.songs_time_components.days)
-      assert_equal(7, @my_tunes_parser_a.songs_time_components.hours)
-      assert_equal(56, @my_tunes_parser_a.songs_time_components.minutes)
-      assert_equal(11, @my_tunes_parser_a.songs_time_components.seconds)
+      assert_equal(8, @my_tunes_parser_a.songs_time_components.hours)
+      assert_equal(10, @my_tunes_parser_a.songs_time_components.minutes)
+      assert_equal(50, @my_tunes_parser_a.songs_time_components.seconds)
     end
 
   end

@@ -71,9 +71,9 @@ module ItunesParser
     def seconds_to_time_components(secs)
       # Ref http://nutrun.com/weblog/ruby-struct/
       time_components = OpenStruct.new()      
-      time = secs.round                     # Get rid of fractional seconds
+      time = secs.round                     # Round to nearest second
       
-      time_components.seconds = time % 60   # Extract seconds
+      time_components.seconds = time % 60   # Get seconds from modulo remainder
       time /= 60                            # Truncate seconds
       time_components.minutes = time % 60   # Extract minutes
       time /= 60                            # Truncate minutes
@@ -86,7 +86,7 @@ module ItunesParser
     def songs_time_components
       total_songs_time = 0
       self.parsed_lib['songs'].each do |song|
-        total_songs_time += (song.metadata['total time'].to_i / 1000)
+        total_songs_time += (song.metadata['total time'].to_f / 1000.0)
       end
       seconds_to_time_components(total_songs_time)     
     end
