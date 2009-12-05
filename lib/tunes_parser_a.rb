@@ -42,14 +42,14 @@ module ItunesParser
         puts song.to_s_simple
       end
     end
- 
+
     def find_songs_for_artist
       songs_for_artist = self.parsed_lib['songs'].find_all do |song|
         song.metadata['artist']=='Cause4Concern'
       end
       songs_for_artist
     end
-    
+
     def find_songs_for_key_value(a_key, a_value)
       songs_for_key_value = self.parsed_lib['songs'].find_all do |song|
         song.metadata[a_key]== a_value
@@ -65,7 +65,28 @@ module ItunesParser
       puts values_array.uniq.count
       values_array.uniq.count
     end
-   
+
+    # Ref book Fulton The Ruby Way Second Edition pg 227
+    def seconds_to_dhms(secs)
+      time = secs.round     # Get rid of fractional seconds
+      seconds = time % 60   # Extract seconds
+      time /= 60            # Truncate seconds
+      minutes = time % 60   # Extract minutes
+      time /= 60            # Truncate minutes
+      hours = time % 24     # Extract hours
+      time /= 24            # Truncate hours
+      days = time           # Days
+      [days, hours, minutes, seconds]
+    end
+
+    def songs_time
+      total_songs_time = 0
+      self.parsed_lib['songs'].each do |song|
+        total_songs_time += (song.metadata['total time'].to_i / 1000)
+      end
+      seconds_to_dhms(total_songs_time)     
+    end
+
   end
 
 end
