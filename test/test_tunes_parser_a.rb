@@ -92,19 +92,24 @@ class TestTunesParserA < Test::Unit::TestCase
       assert_equal(227, @my_tunes_parser_a.count_unique_values_for_key('album'))
     end
     
-    should "14 convert seconds to days hours minutes seconds" do
-      puts "test- count unique values for key"
-      assert_equal([0, 0, 0, 0], @my_tunes_parser_a.seconds_to_dhms(0))
-      assert_equal([0, 0, 0, 42], @my_tunes_parser_a.seconds_to_dhms(42))
-      assert_equal([0, 0, 1, 0], @my_tunes_parser_a.seconds_to_dhms(60))
-      assert_equal([0, 1, 0, 0], @my_tunes_parser_a.seconds_to_dhms(60*60))
-      assert_equal([1, 0, 0, 0], @my_tunes_parser_a.seconds_to_dhms(24*60*60))
+    should "14 convert seconds to time components" do
+      puts "test- convert seconds to time components"
+      assert_equal(0, @my_tunes_parser_a.seconds_to_time_components(0).seconds)
+      assert_equal(1, @my_tunes_parser_a.seconds_to_time_components(24*60*60).days)
+      test_secs = 3662
+      assert_equal(2, @my_tunes_parser_a.seconds_to_time_components(test_secs).seconds)
+      assert_equal(1, @my_tunes_parser_a.seconds_to_time_components(test_secs).minutes)
+      assert_equal(1, @my_tunes_parser_a.seconds_to_time_components(test_secs).hours)
+      assert_equal(0, @my_tunes_parser_a.seconds_to_time_components(test_secs).days)      
     end
 
-    should "15 return library songs total time" do
-      puts "test- library songs total time"
+    should "15 return library songs time components" do
+      puts "test- library songs time components"
       #  this answer seems about double expected.  are we double counting due to albums?
-      assert_equal([10, 7, 56, 11], @my_tunes_parser_a.songs_time)
+      assert_equal(10, @my_tunes_parser_a.songs_time_components.days)
+      assert_equal(7, @my_tunes_parser_a.songs_time_components.hours)
+      assert_equal(56, @my_tunes_parser_a.songs_time_components.minutes)
+      assert_equal(11, @my_tunes_parser_a.songs_time_components.seconds)
     end
 
   end

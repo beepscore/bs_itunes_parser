@@ -2,6 +2,7 @@ require 'rubygems'
 require 'library'
 require 'active_support'
 require 'nokogiri'
+require 'ostruct'
 
 module ItunesParser
 
@@ -67,24 +68,27 @@ module ItunesParser
     end
 
     # Ref book Fulton The Ruby Way Second Edition pg 227
-    def seconds_to_dhms(secs)
-      time = secs.round     # Get rid of fractional seconds
-      seconds = time % 60   # Extract seconds
-      time /= 60            # Truncate seconds
-      minutes = time % 60   # Extract minutes
-      time /= 60            # Truncate minutes
-      hours = time % 24     # Extract hours
-      time /= 24            # Truncate hours
-      days = time           # Days
-      [days, hours, minutes, seconds]
+    def seconds_to_time_components(secs)
+      # Ref http://nutrun.com/weblog/ruby-struct/
+      time_components = OpenStruct.new()      
+      time = secs.round                     # Get rid of fractional seconds
+      
+      time_components.seconds = time % 60   # Extract seconds
+      time /= 60                            # Truncate seconds
+      time_components.minutes = time % 60   # Extract minutes
+      time /= 60                            # Truncate minutes
+      time_components.hours = time % 24     # Extract hours
+      time /= 24                            # Truncate hours
+      time_components.days = time           # Days
+      time_components                       # return the struct
     end
 
-    def songs_time
+    def songs_time_components
       total_songs_time = 0
       self.parsed_lib['songs'].each do |song|
         total_songs_time += (song.metadata['total time'].to_i / 1000)
       end
-      seconds_to_dhms(total_songs_time)     
+      seconds_to_time_components(total_songs_time)     
     end
 
   end
