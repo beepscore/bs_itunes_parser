@@ -70,6 +70,13 @@ class TestTunesParserA < Test::Unit::TestCase
     #   puts ""
     # end 
 
+    should "10 return a string describing song" do
+      puts "test- return a string describing song"
+      a_song = @my_tunes_parser_a.parsed_lib['songs'][6]
+      puts a_song.to_s_simple
+      assert_instance_of(String, a_song.to_s_simple)
+    end
+
     should "11 find songs for artist" do
       puts "test- find songs for artist"
       result = @my_tunes_parser_a.find_songs_for_artist
