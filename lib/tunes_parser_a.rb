@@ -25,19 +25,6 @@ module ItunesParser
       puts "number of songs #{self.song_count}"
     end    
 
-    def list_first_song
-      puts self.parsed_lib['first_song'].inspect
-      puts "first song's class #{self.parsed_lib['first_song'].class}"
-      puts "first song's name #{self.parsed_lib['first_song']['name']}"
-      puts "first song's artist #{self.parsed_lib['first_song']['artist']}"
-      puts "first song's year #{self.parsed_lib['first_song']['year']}"
-      puts "first song's kind #{self.parsed_lib['first_song']['kind']}"
-      puts "first song's size #{self.parsed_lib['first_song']['size']} bytes"
-      # Note: these tags don't have underscore inserted
-      puts "first song's sample rate #{self.parsed_lib['first_song']['sample rate']} Hz"
-      puts "first song's total time #{self.parsed_lib['first_song']['total time']} millisec"
-    end
-
     def list_songs 
       self.parsed_lib['songs'].each do |song|
         puts song.to_s_simple
@@ -63,8 +50,9 @@ module ItunesParser
       self.parsed_lib['songs'].each do |song|
         values_array << song.metadata[a_key]
       end
-      puts values_array.uniq.count
-      values_array.uniq.count
+      unique_count = values_array.uniq.count
+      puts "Unique values for key #{a_key} = #{unique_count}"
+      unique_count
     end
 
     # Ref book Fulton The Ruby Way Second Edition pg 227
