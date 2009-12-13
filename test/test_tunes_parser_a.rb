@@ -106,7 +106,7 @@ class TestTunesParserA < Test::Unit::TestCase
       end
 
       if @itunes_xml_file_name == 'test/testing.xml' 
-        assert_equal(0, @my_tunes_parser_a.find_songs_for_key_value('artist', 'Peabo Bryson').count)
+        assert_equal(14, @my_tunes_parser_a.find_songs_for_key_value('artist', "Peabo Bryson Regina Belle, \& David Friedman").count)
         assert_equal(21, @my_tunes_parser_a.find_songs_for_key_value('year', '1992').count)
       end
     end
