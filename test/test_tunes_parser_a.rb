@@ -156,6 +156,18 @@ class TestTunesParserA < Test::Unit::TestCase
       end
     end
 
-  end
+    should "16 find songs without key" do
+      puts "test- find songs without key"
+      if @itunes_xml_file_name == 'test/test_library.xml'
+        assert_equal(302, @my_tunes_parser_a.find_songs_without_key('album').count)
+        assert_equal(@my_tunes_parser_a.song_count, @my_tunes_parser_a.find_songs_without_key('key_without_match').count)
+      end
 
+      if @itunes_xml_file_name == 'test/testing.xml'
+        assert_equal(0, @my_tunes_parser_a.find_songs_without_key('album').count)
+        assert_equal(@my_tunes_parser_a.song_count, @my_tunes_parser_a.find_songs_without_key('key_without_match').count)
+      end
+    end   
+
+  end
 end

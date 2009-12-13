@@ -50,6 +50,13 @@ module ItunesParser
       end
       songs_for_key_value
     end
+    
+    def find_songs_without_key(a_key)
+      songs_without_key =  @parsed_lib['songs'].find_all do |song|
+        song.metadata.has_key?(a_key) == false
+      end
+      songs_without_key
+    end
 
     def count_unique_values_for_key(a_key)
       values_array = [] #array of values
