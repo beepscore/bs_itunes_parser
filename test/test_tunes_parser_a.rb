@@ -10,7 +10,7 @@ class TestTunesParserA < Test::Unit::TestCase
     setup do
       puts "setup fileRead Context"
       # @itunes_xml_file_name = File.dirname(__FILE__) + './test/test_library.xml'
-      # @itunes_xml_file_name = 'test/test_library.xml'
+      #@itunes_xml_file_name = 'test/test_library.xml'
       @itunes_xml_file_name = 'test/testing.xml'
       @my_tunes_parser_a = ItunesParser::TunesParserA.new(@itunes_xml_file_name)
     end
@@ -160,14 +160,17 @@ class TestTunesParserA < Test::Unit::TestCase
       puts "test- find songs without key"
       if @itunes_xml_file_name == 'test/test_library.xml'
         assert_equal(302, @my_tunes_parser_a.find_songs_without_key('album').count)
+        assert_equal(542, @my_tunes_parser_a.find_songs_without_key('genre').count)
         assert_equal(@my_tunes_parser_a.song_count, @my_tunes_parser_a.find_songs_without_key('key_without_match').count)
       end
 
       if @itunes_xml_file_name == 'test/testing.xml'
         assert_equal(0, @my_tunes_parser_a.find_songs_without_key('album').count)
+        assert_equal(31, @my_tunes_parser_a.find_songs_without_key('comments').count)
         assert_equal(@my_tunes_parser_a.song_count, @my_tunes_parser_a.find_songs_without_key('key_without_match').count)
       end
     end   
+
 
   end
 end
