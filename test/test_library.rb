@@ -10,26 +10,29 @@ class TestLibrary < Test::Unit::TestCase
     library = ItunesParser::Library.new
     assert_instance_of(ItunesParser::Library, library)
   end
-  
+
   context "#parse" do
     setup do
+      # @itunes_xml_file_name = 'test/test_library.xml'
+      @itunes_xml_file_name = 'test/testing.xml'
       @lib = ItunesParser::Library.new
-      @result = @lib.parse(File.read('test/test_library.xml'))
+      @result = @lib.parse(File.read(@itunes_xml_file_name))
     end
 
     should "return a Hash" do
       assert_instance_of(Hash, @result)
     end
-    
-    should "have a version key" do
-      assert_equal(@result['version'], '9.0.1')
+
+    should "have correct version key" do
+      if @itunes_xml_file_name == 'test/test_library.xml' 
+        assert_equal(@result['version'], '9.0.1')
+      end
+      if @itunes_xml_file_name == 'test/testing.xml' 
+        assert_equal(@result['version'], '9.0.2')
+      end
     end
-    
-    should "find the first song with the appropriate name" do
-      assert_equal(@result['first_song']['name'], 'Totem Pole')
-    end
-    
-    should "give us an array of Songs" do
+
+    should "return an array containing only Songs" do
       assert @result['songs'].all? { |r| r.is_a?(ItunesParser::Song) }      
     end
   end
