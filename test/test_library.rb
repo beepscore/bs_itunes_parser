@@ -25,10 +25,10 @@ class TestLibrary < Test::Unit::TestCase
 
     should "have correct version key" do
       if @itunes_xml_file_name == 'test/test_library.xml' 
-        assert_equal(@result['version'], '9.0.1')
+        assert_equal(@lib.version, '9.0.1')
       end
       if @itunes_xml_file_name == 'test/testing.xml' 
-        assert_equal(@result['version'], '9.0.2')
+        assert_equal(@lib.version, '9.0.2')
       end
     end
 
