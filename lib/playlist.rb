@@ -7,7 +7,7 @@ module ItunesParser
     end
     
     def to_s_simple
-        "playlist id = #{@metadata['playlist id']}  name = #{@metadata['name']}"
+        "playlist_id = #{@metadata['playlist_id']}  name = #{@metadata['name']}"
     end
     
   end
