@@ -18,16 +18,16 @@ module ItunesParser
     end
 
     def song_count
-      @song_count = @lib.songs.count
+      self.lib.songs.count
     end
 
     def list_summary
-      puts "library version #{@lib.version}"
+      puts "library version #{self.lib.version}"
       puts "number of songs #{self.song_count}"
     end    
 
     def list_songs 
-      self.parsed_lib.songs.each do |song|
+      self.lib.songs.each do |song|
         puts song.to_s_simple
       end
     end

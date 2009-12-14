@@ -13,14 +13,10 @@ class TestLibrary < Test::Unit::TestCase
 
   context "#parse" do
     setup do
-      # @itunes_xml_file_name = 'test/test_library.xml'
+      #@itunes_xml_file_name = 'test/test_library.xml'
       @itunes_xml_file_name = 'test/testing.xml'
       @lib = ItunesParser::Library.new
       @result = @lib.parse(File.read(@itunes_xml_file_name))
-    end
-
-    should "return a Hash" do
-      assert_instance_of(Hash, @result)
     end
 
     should "have correct version key" do

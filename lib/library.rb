@@ -14,15 +14,12 @@ module ItunesParser
     attr_accessor :playlists
 
     def initialize
-      # instance variable @songs array
       @version = ''
       @songs = []
       @playlists = []
     end
-    
+
     def parse(xml)
-      # results hash
-      results = {}
 
       doc     = Nokogiri::XML(xml)
 
@@ -32,9 +29,6 @@ module ItunesParser
       #  all_songs is a Nokogiri::XML::NodeSet
       all_songs = doc.xpath('/plist/dict/dict/dict')
 
-      # In results hash, set key 'songs' to empty array.  Ref Thomas pg 46        
-      results['songs'] = []
-
       all_songs.each do |track|
 
         song = Song.new
@@ -43,21 +37,14 @@ module ItunesParser
           key_formatted = key.content.downcase.tr(' ', '_')
           song.metadata[key_formatted] = key.next.content
         end
-
-        # The results hash 'songs' key has an array for its value.  Append song to the array.
+        # Append song to the songs array.
         self.songs << song
       end
-
-      results
     end #parse
-    
-    def parse_playlists
-      # results hash
 
+
+    def parse_playlists
       # ===============================
-      # In results hash, set key 'playlists' to empty array.  Ref Thomas pg 46        
-      # results['playlists'] = []
-      # 
       # all_playlists.each do |track|
       #   playlist = Playlist.new
       # 
@@ -66,11 +53,11 @@ module ItunesParser
       #     playlist.metadata[key_formatted] = key.next.content
       #   end
       # 
-      #   # The results hash 'playlists' key has an array for its value.  Append playlist to the array.
+      #   # Append playlist to the playlists array.
       #   results['playlists'] << playlist
       # end
-
       # ===============================
+      
       #  playlist_dicts is a Nokogiri::XML::NodeSet
       playlist_dicts = doc.xpath( "/plist/dict/array/dict" )
 
@@ -105,7 +92,7 @@ module ItunesParser
         puts tracks.map {|t| t.content }
 
       end
-      
+
     end # parse_playlists
 
   end #Library
