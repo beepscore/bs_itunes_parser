@@ -17,9 +17,9 @@ module ItunesParser
       @songs = []
       @playlists = []
     end
-
+    
     def parse(xml)
-      #results hash
+      # results hash
       results = {}
 
       doc     = Nokogiri::XML(xml)
@@ -27,6 +27,7 @@ module ItunesParser
       version = doc.xpath('/plist/dict/string[1]')[0]
       results['version'] = version.content
 
+      #  all_songs is a Nokogiri::XML::NodeSet
       all_songs = doc.xpath('/plist/dict/dict/dict')
 
       # In results hash, set key 'songs' to empty array.  Ref Thomas pg 46        
@@ -46,35 +47,56 @@ module ItunesParser
       end
 
       # ===============================
-      #  FIXME: use correct path
-      all_playlists = doc.xpath('/plist/*/key[. = "Playlists"]')
-
       # In results hash, set key 'playlists' to empty array.  Ref Thomas pg 46        
-      results['playlists'] = []
+      # results['playlists'] = []
+      # 
+      # all_playlists.each do |track|
+      #   playlist = Playlist.new
+      # 
+      #   track.xpath('./key').each do |key|
+      #     key_formatted = key.content.downcase.tr(' ', '_')
+      #     playlist.metadata[key_formatted] = key.next.content
+      #   end
+      # 
+      #   # The results hash 'playlists' key has an array for its value.  Append playlist to the array.
+      #   results['playlists'] << playlist
+      # end
 
-      all_playlists.each do |track|
-        puts "track child = #{track.child}"
+      # ===============================
+      #  playlist_dicts is a Nokogiri::XML::NodeSet
+      playlist_dicts = doc.xpath( "/plist/dict/array/dict" )
 
-        playlist = Playlist.new
+      playlist_dicts.each do |playlist_xml|
+        name = playlist_xml.xpath( "./key[text()='Name']" ).first.next_sibling.content
+        puts "Found playlist called '#{name}'"
 
-        track.xpath('./key').each do |key|
-          key_formatted = key.content.downcase.tr(' ', '_')
-          playlist.metadata[key_formatted] = key.next.content
+        if visible = playlist_xml.xpath( "./key[text()='Visible']" )
+          unless visible.empty?
+            puts "- skipping; invisible"
+            next
+          end
         end
 
-        # The results hash 'playlists' key has an array for its value.  Append playlist to the array.
-        results['playlists'] << playlist
-      end
-      
-      # ===============================
-      # FIXME
-      # find all tags with a key of Playlists
-      # Search for nodes by xpath
-      puts doc.search('/*/*/key[. = "Playlists"]')
+        if distinguished_kind = playlist_xml.xpath(
+          "./key[text()='Distinguished Kind']" )
+          unless distinguished_kind.empty?
+            puts "- skipping; has a distinguished kind"
+            next
+          end
+        end
 
-      # doc.xpath('/*/*/key[. = "Playlists"]').each do |a_tag|
-      #   puts a_tag.content
-      # end  
+        if smart_info = playlist_xml.xpath( "./key[text()='Smart Info']" )
+          unless smart_info.empty?
+            puts "- skipping; has smart info"
+            next
+          end
+        end
+
+        # we have something we want now
+        tracks = playlist_xml.xpath( "array[1]//integer" )
+        puts tracks.map {|t| t.content }
+
+      end
       # ===============================
 
       results
