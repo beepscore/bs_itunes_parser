@@ -10,6 +10,7 @@ module ItunesParser
 
     # parsed_lib is a hash
     attr_accessor :parsed_lib
+    attr_accessor :lib
 
     def initialize(itunes_xml_file_name)   
       @lib = ItunesParser::Library.new    
@@ -17,29 +18,29 @@ module ItunesParser
     end
 
     def song_count
-      @song_count = self.parsed_lib['songs'].count
+      @song_count = @lib.songs.count
     end
 
     def list_summary
-      puts "library version #{self.parsed_lib['version']}"
+      puts "library version #{@lib.version}"
       puts "number of songs #{self.song_count}"
     end    
 
     def list_songs 
-      self.parsed_lib['songs'].each do |song|
+      self.parsed_lib.songs.each do |song|
         puts song.to_s_simple
       end
     end
 
     def find_songs_for_key_value(a_key, a_value)
-      songs_for_key_value = self.parsed_lib['songs'].find_all do |song|
+      songs_for_key_value = self.lib.songs.find_all do |song|
         song.metadata[a_key]== a_value
       end
       songs_for_key_value
     end
     
     def find_songs_without_key(a_key)
-      songs_without_key =  @parsed_lib['songs'].find_all do |song|
+      songs_without_key =  self.lib.songs.find_all do |song|
         song.metadata.has_key?(a_key) == false
       end
       songs_without_key
@@ -47,7 +48,7 @@ module ItunesParser
 
     def count_unique_values_for_key(a_key)
       values_array = [] #array of values
-      self.parsed_lib['songs'].each do |song|
+      self.lib.songs.each do |song|
         values_array << song.metadata[a_key]
       end
       unique_count = values_array.uniq.count
@@ -73,7 +74,7 @@ module ItunesParser
 
     def songs_time_components
       total_songs_time = 0
-      self.parsed_lib['songs'].each do |song|
+      self.lib.songs.each do |song|
         total_songs_time += (song.metadata['total_time'].to_f / 1000.0)
       end
       seconds_to_time_components(total_songs_time)     

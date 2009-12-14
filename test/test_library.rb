@@ -33,7 +33,8 @@ class TestLibrary < Test::Unit::TestCase
     end
 
     should "return an array containing only Songs" do
-      assert @result['songs'].all? { |r| r.is_a?(ItunesParser::Song) }      
+      # assert @result['songs'].all? { |r| r.is_a?(ItunesParser::Song) }      
+      assert @lib.songs.all? { |r| r.is_a?(ItunesParser::Song) }      
     end
   end
 end
