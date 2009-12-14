@@ -54,9 +54,9 @@ class TestTunesParserA < Test::Unit::TestCase
         # size in bytes
         assert_equal("5191680", first_song_in_songs.metadata['size'])
         # sample rate in Hz
-        assert_equal("44100", first_song_in_songs.metadata['sample rate'])
+        assert_equal("44100", first_song_in_songs.metadata['sample_rate'])
         # total time in msec
-        assert_equal("180035", first_song_in_songs.metadata['total time'])
+        assert_equal("180035", first_song_in_songs.metadata['total_time'])
       end
 
       if @itunes_xml_file_name == 'test/testing.xml' 
@@ -68,9 +68,9 @@ class TestTunesParserA < Test::Unit::TestCase
         # size in bytes
         assert_equal("1898624", first_song_in_songs.metadata['size'])
         # sample rate in Hz
-        assert_equal("44100", first_song_in_songs.metadata['sample rate'])
+        assert_equal("44100", first_song_in_songs.metadata['sample_rate'])
         # total time in msec
-        assert_equal("79725", first_song_in_songs.metadata['total time'])
+        assert_equal("79725", first_song_in_songs.metadata['total_time'])
       end
 
     end
@@ -115,13 +115,13 @@ class TestTunesParserA < Test::Unit::TestCase
       puts "test- count unique values for key"
       if @itunes_xml_file_name == 'test/test_library.xml' 
         assert_equal(237, @my_tunes_parser_a.count_unique_values_for_key('artist'))
-        assert_equal(1786, @my_tunes_parser_a.count_unique_values_for_key('track id'))
+        assert_equal(1786, @my_tunes_parser_a.count_unique_values_for_key('track_id'))
         assert_equal(227, @my_tunes_parser_a.count_unique_values_for_key('album'))
       end
 
       if @itunes_xml_file_name == 'test/testing.xml' 
         assert_equal(7, @my_tunes_parser_a.count_unique_values_for_key('artist'))
-        assert_equal(52, @my_tunes_parser_a.count_unique_values_for_key('track id'))
+        assert_equal(52, @my_tunes_parser_a.count_unique_values_for_key('track_id'))
         assert_equal(2, @my_tunes_parser_a.count_unique_values_for_key('album'))
       end
     end

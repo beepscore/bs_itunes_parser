@@ -37,7 +37,8 @@ module ItunesParser
         song = Song.new
 
         track.xpath('./key').each do |key|
-          song.metadata[key.content.downcase.underscore] = key.next.content
+          key_formatted = key.content.downcase.tr(' ', '_')
+          song.metadata[key_formatted] = key.next.content
         end
 
         # The results hash 'songs' key has an array for its value.  Append song to the array.
@@ -57,7 +58,8 @@ module ItunesParser
         playlist = Playlist.new
 
         track.xpath('./key').each do |key|
-          playlist.metadata[key.content.downcase.underscore] = key.next.content
+          key_formatted = key.content.downcase.tr(' ', '_')
+          playlist.metadata[key_formatted] = key.next.content
         end
 
         # The results hash 'playlists' key has an array for its value.  Append playlist to the array.

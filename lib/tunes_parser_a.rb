@@ -74,7 +74,7 @@ module ItunesParser
     def songs_time_components
       total_songs_time = 0
       self.parsed_lib['songs'].each do |song|
-        total_songs_time += (song.metadata['total time'].to_f / 1000.0)
+        total_songs_time += (song.metadata['total_time'].to_f / 1000.0)
       end
       seconds_to_time_components(total_songs_time)     
     end
