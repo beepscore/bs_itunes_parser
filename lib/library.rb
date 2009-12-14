@@ -19,6 +19,7 @@ module ItunesParser
       @playlists = []
     end
 
+    # parse the xml file and populate the library attributes
     def parse(xml)
 
       doc     = Nokogiri::XML(xml)

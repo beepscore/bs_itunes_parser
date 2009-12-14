@@ -84,12 +84,12 @@ class TestTunesParserA < Test::Unit::TestCase
       assert_instance_of(ItunesParser::Song, last_song)
     end
 
-    should "06 list songs" do
-      puts "test- list songs"
-      @my_tunes_parser_a.list_songs
-      assert_not_nil(true)
-      puts ""
-    end 
+    # should "06 list songs" do
+    #   puts "test- list songs"
+    #   @my_tunes_parser_a.list_songs
+    #   assert_not_nil(true)
+    #   puts ""
+    # end 
 
     should "10 return a string describing song" do
       puts "test- return a string describing song"
