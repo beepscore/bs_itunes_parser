@@ -8,13 +8,11 @@ module ItunesParser
 
   class TunesParserA
 
-    # parsed_lib is a hash
-    attr_accessor :parsed_lib
     attr_accessor :lib
 
     def initialize(itunes_xml_file_name)   
       @lib = ItunesParser::Library.new    
-      @parsed_lib = @lib.parse(File.read(itunes_xml_file_name))
+      @lib.parse(File.read(itunes_xml_file_name))
     end
 
     def song_count
