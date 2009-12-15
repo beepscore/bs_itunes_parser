@@ -28,22 +28,26 @@ module ItunesParser
       version_key = @doc.xpath('/plist/dict/string[1]')[0]
       self.version = version_key.content
 
+      self.parse_songs
+            
+    end
+    
+    def parse_songs    
       #  all_songs is a Nokogiri::XML::NodeSet
-      all_songs = @doc.xpath('/plist/dict/dict/dict')
+       all_songs = @doc.xpath('/plist/dict/dict/dict')
 
-      all_songs.each do |track|
+       all_songs.each do |track|
 
-        song = Song.new
+         song = Song.new
 
-        track.xpath('./key').each do |key|
-          key_formatted = key.content.downcase.tr(' ', '_')
-          song.metadata[key_formatted] = key.next.content
-        end
-        # Append song to the songs array.
-        self.songs << song
-      end
-    end #parse
-
+         track.xpath('./key').each do |key|
+           key_formatted = key.content.downcase.tr(' ', '_')
+           song.metadata[key_formatted] = key.next.content
+         end
+         # Append song to the songs array.
+         self.songs << song
+       end    
+    end
 
     def parse_playlists
       # ===============================
