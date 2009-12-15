@@ -25,7 +25,7 @@ class TestTunesParserA < Test::Unit::TestCase
       puts @my_tunes_parser_a.library_summary
       assert_instance_of(String, @my_tunes_parser_a.library_summary)
     end
-    
+
     should "03 return the number of songs" do
       puts "test- return the number of songs"
       if @itunes_xml_file_name == 'test/test_library.xml' 
@@ -150,7 +150,7 @@ class TestTunesParserA < Test::Unit::TestCase
         assert_equal(13, @my_tunes_parser_a.songs_time_components.seconds) 
       end
     end
-    
+
     should "16 return library playing time" do
       puts "test- library playing time"
       puts @my_tunes_parser_a.library_playing_time
@@ -163,7 +163,7 @@ class TestTunesParserA < Test::Unit::TestCase
         assert_equal("Playing time = 00:01:48:13 [dd:hh:mm:ss]", @my_tunes_parser_a.library_playing_time)
       end
     end
-    
+
 
     should "18 find songs without key" do
       puts "test- find songs without key"
@@ -178,7 +178,29 @@ class TestTunesParserA < Test::Unit::TestCase
         assert_equal(31, @my_tunes_parser_a.find_songs_without_key('comments').count)
         assert_equal(@my_tunes_parser_a.song_count, @my_tunes_parser_a.find_songs_without_key('key_without_match').count)
       end
-    end   
+    end
+
+    should "30 return the number of playlists" do
+      puts "test- return the number of playlists"
+      @my_tunes_parser_a.list_playlists
+      if @itunes_xml_file_name == 'test/test_library.xml' 
+        assert_equal(36, @my_tunes_parser_a.playlists_length)
+      end
+      if @itunes_xml_file_name == 'test/testing.xml' 
+        assert_equal(2, @my_tunes_parser_a.playlists_length)
+      end
+    end
+
+    should "31 return a playlist" do
+      puts "test- return a playlist"
+      if @itunes_xml_file_name == 'test/test_library.xml' 
+        assert_instance_of(ItunesParser::Playlist, @my_tunes_parser_a.lib.playlists['9416'])
+      end
+      if @itunes_xml_file_name == 'test/testing.xml' 
+        assert_instance_of(ItunesParser::Playlist, @my_tunes_parser_a.lib.playlists['697'])
+      end
+    end
+
 
   end
 end

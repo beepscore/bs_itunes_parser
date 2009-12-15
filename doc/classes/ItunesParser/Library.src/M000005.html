@@ -13,19 +13,19 @@
   <pre><span class="ruby-comment cmt"># File lib/library.rb, line 42</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">parse_songs</span>    
       <span class="ruby-comment cmt">#  A Nokogiri::XML::NodeSet</span>
-       <span class="ruby-identifier">all_songs</span> = <span class="ruby-ivar">@doc</span>.<span class="ruby-identifier">xpath</span>(<span class="ruby-value str">'/plist/dict/dict/dict'</span>)
+      <span class="ruby-identifier">all_songs</span> = <span class="ruby-ivar">@doc</span>.<span class="ruby-identifier">xpath</span>(<span class="ruby-value str">'/plist/dict/dict/dict'</span>)
 
-       <span class="ruby-identifier">all_songs</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">track</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">all_songs</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">track</span><span class="ruby-operator">|</span>
 
-         <span class="ruby-identifier">song</span> = <span class="ruby-constant">Song</span>.<span class="ruby-identifier">new</span>
+        <span class="ruby-identifier">song</span> = <span class="ruby-constant">Song</span>.<span class="ruby-identifier">new</span>
 
-         <span class="ruby-identifier">track</span>.<span class="ruby-identifier">xpath</span>(<span class="ruby-value str">'./key'</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">key</span><span class="ruby-operator">|</span>
-           <span class="ruby-identifier">key_formatted</span> = <span class="ruby-identifier">key</span>.<span class="ruby-identifier">content</span>.<span class="ruby-identifier">downcase</span>.<span class="ruby-identifier">tr</span>(<span class="ruby-value str">' '</span>, <span class="ruby-value str">'_'</span>)
-           <span class="ruby-identifier">song</span>.<span class="ruby-identifier">metadata</span>[<span class="ruby-identifier">key_formatted</span>] = <span class="ruby-identifier">key</span>.<span class="ruby-identifier">next</span>.<span class="ruby-identifier">content</span>
-         <span class="ruby-keyword kw">end</span>
-         <span class="ruby-comment cmt"># Append song to the songs array.</span>
-         <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">songs</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">song</span>
-       <span class="ruby-keyword kw">end</span>    
+        <span class="ruby-identifier">track</span>.<span class="ruby-identifier">xpath</span>(<span class="ruby-value str">'./key'</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">key</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">key_formatted</span> = <span class="ruby-identifier">key</span>.<span class="ruby-identifier">content</span>.<span class="ruby-identifier">downcase</span>.<span class="ruby-identifier">tr</span>(<span class="ruby-value str">' '</span>, <span class="ruby-value str">'_'</span>)
+          <span class="ruby-identifier">song</span>.<span class="ruby-identifier">metadata</span>[<span class="ruby-identifier">key_formatted</span>] = <span class="ruby-identifier">key</span>.<span class="ruby-identifier">next</span>.<span class="ruby-identifier">content</span>
+        <span class="ruby-keyword kw">end</span>
+        <span class="ruby-comment cmt"># Append song to the songs array.</span>
+        <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">songs</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">song</span>
+      <span class="ruby-keyword kw">end</span>    
     <span class="ruby-keyword kw">end</span></pre>
 </body>
 </html>

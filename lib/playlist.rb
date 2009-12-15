@@ -12,7 +12,7 @@ module ItunesParser
     
     # Returns a string with a simple description of the playlist
     def to_s_simple
-        "playlist_id = #{@metadata['playlist_id']}  name = #{@metadata['name']}"
+      "playlist_id = #{self.metadata['playlist_id']}  name = #{self.metadata['name']}"
     end
     
   end

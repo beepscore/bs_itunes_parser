@@ -97,6 +97,20 @@ module ItunesParser
       stc = self.songs_time_components
       "Playing time = %02d:%02d:%02d:%02d [dd:hh:mm:ss]" % [stc.days, stc.hours, stc.minutes, stc.seconds]
     end
-
+    
+    # Returns the number of playlists in the library
+    def playlists_length
+      self.lib.playlists.length
+    end
+    
+    # "Puts" the simple description for each playlist in the library
+    def list_playlists
+      # hash .each method requires key-value pair in block, not key only
+      self.lib.playlists.each do |playlist_id, playlist|
+        puts playlist.to_s_simple
+      end
+    end
+    
+    
   end
 end
