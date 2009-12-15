@@ -20,9 +20,9 @@ module ItunesParser
     end
 
     # parse the xml file and populate the library attributes
-    def parse(xml)
+    def parse(itunes_xml_file_name)
 
-      doc = Nokogiri::XML(xml)
+      doc = Nokogiri::XML(itunes_xml_file_name)
       
       #version_key is a Nokogiri::XML::Element
       version_key = doc.xpath('/plist/dict/string[1]')[0]
