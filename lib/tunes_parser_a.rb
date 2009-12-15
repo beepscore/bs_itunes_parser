@@ -19,9 +19,8 @@ module ItunesParser
       self.lib.songs.count
     end
 
-    def list_summary
-      puts "library version #{self.lib.version}"
-      puts "number of songs #{self.song_count}"
+    def library_summary
+      "Summary:  library version = #{self.lib.version}, number of songs = #{self.song_count}"
     end    
 
     def list_songs 
@@ -54,8 +53,9 @@ module ItunesParser
       unique_count
     end
 
-    # Ref book Fulton The Ruby Way Second Edition pg 227
-    def seconds_to_time_components(secs)
+    # Returns a struct of time components with days hours minutes seconds
+    def seconds_to_time_components(secs)     
+      # Ref book Fulton The Ruby Way Second Edition pg 227
       # Ref http://nutrun.com/weblog/ruby-struct/
       time_components = OpenStruct.new()      
       time = secs.round                     # Round to nearest second
@@ -76,6 +76,11 @@ module ItunesParser
         total_songs_time += (song.metadata['total_time'].to_f / 1000.0)
       end
       seconds_to_time_components(total_songs_time)     
+    end
+    
+    def library_playing_time
+      stc = self.songs_time_components
+      "Playing time = %02d:%02d:%02d:%02d [dd:hh:mm:ss]" % [stc.days, stc.hours, stc.minutes, stc.seconds]
     end
 
   end

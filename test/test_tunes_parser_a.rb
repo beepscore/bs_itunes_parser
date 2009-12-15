@@ -17,23 +17,20 @@ class TestTunesParserA < Test::Unit::TestCase
 
     should "01 return a TunesParserA" do
       puts "test- return a TunesParserA"
-      puts ""
       assert_instance_of(ItunesParser::TunesParserA, @my_tunes_parser_a)
     end
 
-    should "02 list a summary" do
-      puts "test- list a summary"
-      puts ""
-      assert_nil(@my_tunes_parser_a.list_summary)
+    should "02 return a string library summary" do
+      puts "test- return a string library summary"
+      puts @my_tunes_parser_a.library_summary
+      assert_instance_of(String, @my_tunes_parser_a.library_summary)
     end
-
+    
     should "03 return the number of songs" do
       puts "test- return the number of songs"
-      puts ""
       if @itunes_xml_file_name == 'test/test_library.xml' 
         assert_equal(1786, @my_tunes_parser_a.song_count)
       end
-
       if @itunes_xml_file_name == 'test/testing.xml' 
         assert_equal(52, @my_tunes_parser_a.song_count)
       end
@@ -114,14 +111,14 @@ class TestTunesParserA < Test::Unit::TestCase
     should "13 count unique values for key" do
       puts "test- count unique values for key"
       if @itunes_xml_file_name == 'test/test_library.xml' 
-        assert_equal(237, @my_tunes_parser_a.count_unique_values_for_key('artist'))
         assert_equal(1786, @my_tunes_parser_a.count_unique_values_for_key('track_id'))
+        assert_equal(237, @my_tunes_parser_a.count_unique_values_for_key('artist'))
         assert_equal(227, @my_tunes_parser_a.count_unique_values_for_key('album'))
       end
 
-      if @itunes_xml_file_name == 'test/testing.xml' 
-        assert_equal(7, @my_tunes_parser_a.count_unique_values_for_key('artist'))
+      if @itunes_xml_file_name == 'test/testing.xml'
         assert_equal(52, @my_tunes_parser_a.count_unique_values_for_key('track_id'))
+        assert_equal(7, @my_tunes_parser_a.count_unique_values_for_key('artist'))
         assert_equal(2, @my_tunes_parser_a.count_unique_values_for_key('album'))
       end
     end
@@ -139,8 +136,6 @@ class TestTunesParserA < Test::Unit::TestCase
 
     should "15 return library songs time components" do
       puts "test- library songs time components"
-      #  TODO: this answer seems about double expected.
-      #  are we double counting due to albums?  Duplicate songs with different sample rates?
       if @itunes_xml_file_name == 'test/test_library.xml'
         assert_equal(10, @my_tunes_parser_a.songs_time_components.days)
         assert_equal(8, @my_tunes_parser_a.songs_time_components.hours)
@@ -155,8 +150,22 @@ class TestTunesParserA < Test::Unit::TestCase
         assert_equal(13, @my_tunes_parser_a.songs_time_components.seconds) 
       end
     end
+    
+    should "16 return library playing time" do
+      puts "test- library playing time"
+      puts @my_tunes_parser_a.library_playing_time
+      #  TODO: this answer seems about double expected.
+      #  are we double counting due to albums?  Duplicate songs with different sample rates?
+      if @itunes_xml_file_name == 'test/test_library.xml'
+        assert_equal("Playing time = 10:08:10:50 [dd:hh:mm:ss]", @my_tunes_parser_a.library_playing_time)
+      end
+      if @itunes_xml_file_name == 'test/testing.xml'
+        assert_equal("Playing time = 00:01:48:13 [dd:hh:mm:ss]", @my_tunes_parser_a.library_playing_time)
+      end
+    end
+    
 
-    should "16 find songs without key" do
+    should "18 find songs without key" do
       puts "test- find songs without key"
       if @itunes_xml_file_name == 'test/test_library.xml'
         assert_equal(302, @my_tunes_parser_a.find_songs_without_key('album').count)
