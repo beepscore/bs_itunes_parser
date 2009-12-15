@@ -13,10 +13,11 @@ class TestLibrary < Test::Unit::TestCase
 
   context "#parse" do
     setup do
+      @lib = ItunesParser::Library.new
+      
       #@itunes_xml_file_name = 'test/test_library.xml'
       @itunes_xml_file_name = 'test/testing.xml'
-      @lib = ItunesParser::Library.new
-      @result = @lib.parse(File.read(@itunes_xml_file_name))
+      @lib.parse(File.read(@itunes_xml_file_name))
     end
 
     should "have correct version key" do
