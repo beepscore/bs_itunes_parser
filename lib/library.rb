@@ -29,7 +29,7 @@ module ItunesParser
       self.version = version_key.content
 
       self.parse_songs
-            
+      self.parse_playlists            
     end
     
     def parse_songs    
