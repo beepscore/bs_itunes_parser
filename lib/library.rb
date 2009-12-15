@@ -16,20 +16,20 @@ module ItunesParser
     def initialize
       @version = ''
       @songs = []
-      @playlists = []
+      @playlists = {}
     end
 
     # parse the xml file and populate the library attributes
     def parse(itunes_xml_file_name)
 
-      doc = Nokogiri::XML(itunes_xml_file_name)
+      @doc = Nokogiri::XML(itunes_xml_file_name)
       
       #version_key is a Nokogiri::XML::Element
-      version_key = doc.xpath('/plist/dict/string[1]')[0]
+      version_key = @doc.xpath('/plist/dict/string[1]')[0]
       self.version = version_key.content
 
       #  all_songs is a Nokogiri::XML::NodeSet
-      all_songs = doc.xpath('/plist/dict/dict/dict')
+      all_songs = @doc.xpath('/plist/dict/dict/dict')
 
       all_songs.each do |track|
 
@@ -61,7 +61,7 @@ module ItunesParser
       # ===============================
       
       #  playlist_dicts is a Nokogiri::XML::NodeSet
-      playlist_dicts = doc.xpath( "/plist/dict/array/dict" )
+      playlist_dicts = @doc.xpath( "/plist/dict/array/dict" )
 
       playlist_dicts.each do |playlist_xml|
         name = playlist_xml.xpath( "./key[text()='Name']" ).first.next_sibling.content

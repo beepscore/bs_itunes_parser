@@ -4,6 +4,7 @@ module ItunesParser
     
     def initialize
       @metadata = {}
+      @track_ids = []
     end
     
     def to_s_simple
