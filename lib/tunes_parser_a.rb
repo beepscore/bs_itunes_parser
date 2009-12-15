@@ -106,11 +106,10 @@ module ItunesParser
     # "Puts" the simple description for each playlist in the library
     def list_playlists
       # hash .each method requires key-value pair in block, not key only
-      self.lib.playlists.each do |playlist_id, playlist|
+      self.lib.playlists.each_value do |playlist|
         puts playlist.to_s_simple
       end
     end
-    
-    
+   
   end
 end

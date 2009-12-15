@@ -30,8 +30,12 @@ class TestLibrary < Test::Unit::TestCase
     end
 
     should "return an array containing only Songs" do
-      # assert @result['songs'].all? { |r| r.is_a?(ItunesParser::Song) }      
       assert @lib.songs.all? { |r| r.is_a?(ItunesParser::Song) }      
     end
+    
+    should "return a hash containing only Playlists" do
+      assert @lib.playlists.values.all? { |value| value.is_a?(ItunesParser::Playlist) }      
+    end
+    
   end
 end
