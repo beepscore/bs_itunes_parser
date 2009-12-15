@@ -7,7 +7,7 @@ require 'song'
 require 'playlist'
 
 module ItunesParser
-  # A model class for an iTunes library
+  # A model class for a parsed iTunes library
   class Library
     
     # The version of the iTunes library e.g. 9.0.2

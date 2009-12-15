@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>library_playing_time (ItunesParser::TunesParserA)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/tunes_parser_a.rb, line 96</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">library_playing_time</span>
+      <span class="ruby-identifier">stc</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">songs_time_components</span>
+      <span class="ruby-value str">&quot;Playing time = %02d:%02d:%02d:%02d [dd:hh:mm:ss]&quot;</span> <span class="ruby-operator">%</span> [<span class="ruby-identifier">stc</span>.<span class="ruby-identifier">days</span>, <span class="ruby-identifier">stc</span>.<span class="ruby-identifier">hours</span>, <span class="ruby-identifier">stc</span>.<span class="ruby-identifier">minutes</span>, <span class="ruby-identifier">stc</span>.<span class="ruby-identifier">seconds</span>]
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>
