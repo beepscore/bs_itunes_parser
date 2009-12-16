@@ -28,7 +28,7 @@ class TestTunesParserA < Test::Unit::TestCase
 
     should "03 return the number of songs" do
       puts "test- return the number of songs"
-      if @itunes_xml_file_name == 'test/test_library.xml' 
+      if @itunes_xml_file_name == 'test/test_library.xml'
         assert_equal(1786, @my_tunes_parser_a.song_count)
       end
       if @itunes_xml_file_name == 'test/testing.xml' 
@@ -42,7 +42,7 @@ class TestTunesParserA < Test::Unit::TestCase
       first_song_in_songs = @my_tunes_parser_a.lib.songs[0]
       puts "first song in songs = #{first_song_in_songs.inspect}"
       puts "" 
-      if @itunes_xml_file_name == 'test/test_library.xml' 
+      if @itunes_xml_file_name == 'test/test_library.xml'
         assert_instance_of(ItunesParser::Song, first_song_in_songs)
         assert_equal("Dan Sartain", first_song_in_songs.metadata['artist'])
         assert_equal("Totem Pole", first_song_in_songs.metadata['name'])
@@ -56,7 +56,7 @@ class TestTunesParserA < Test::Unit::TestCase
         assert_equal("180035", first_song_in_songs.metadata['total_time'])
       end
 
-      if @itunes_xml_file_name == 'test/testing.xml' 
+      if @itunes_xml_file_name == 'test/testing.xml'
         assert_instance_of(ItunesParser::Song, first_song_in_songs)
         assert_equal("Bruce Adler", first_song_in_songs.metadata['artist'])
         assert_equal("Arabian Nights", first_song_in_songs.metadata['name'])
@@ -97,20 +97,29 @@ class TestTunesParserA < Test::Unit::TestCase
 
     should "07 find songs for key value" do
       puts "test- find songs for key value"
-      if @itunes_xml_file_name == 'test/test_library.xml'       
-        assert_equal(8, @my_tunes_parser_a.find_songs_for_key_value('artist', 'Cause4Concern').count)
+      if @itunes_xml_file_name == 'test/test_library.xml'
+        assert_equal(9, @my_tunes_parser_a.find_songs_for_key_value('artist', 'Cause4Concern').count)
+        assert_equal(4, @my_tunes_parser_a.find_songs_for_key_value('artist', "SILENT WITNESS \& BREAK").count)
+        assert_equal(8, @my_tunes_parser_a.find_songs_for_key_value('artist', "SILENT").count)
+        assert_equal(8, @my_tunes_parser_a.find_songs_for_key_value('artist', "Silent").count)
+        assert_equal(8, @my_tunes_parser_a.find_songs_for_key_value('artist', "ilen").count)
         assert_equal(41, @my_tunes_parser_a.find_songs_for_key_value('year', '2001').count)
       end
 
-      if @itunes_xml_file_name == 'test/testing.xml' 
+      if @itunes_xml_file_name == 'test/testing.xml'
+        assert_equal(14, @my_tunes_parser_a.find_songs_for_key_value('artist', "Peabo Bryson Regina Belle, & David Friedman").count)
         assert_equal(14, @my_tunes_parser_a.find_songs_for_key_value('artist', "Peabo Bryson Regina Belle, \& David Friedman").count)
+        assert_equal(14, @my_tunes_parser_a.find_songs_for_key_value('artist', "Peabo").count)
+        assert_equal(14, @my_tunes_parser_a.find_songs_for_key_value('artist', "peabo").count)
+        assert_equal(14, @my_tunes_parser_a.find_songs_for_key_value('artist', "ryso").count)
         assert_equal(21, @my_tunes_parser_a.find_songs_for_key_value('year', '1992').count)
+        assert_equal(21, @my_tunes_parser_a.find_songs_for_key_value('year', '92').count)
       end
     end
 
     should "08 count unique values for key" do
       puts "test- count unique values for key"
-      if @itunes_xml_file_name == 'test/test_library.xml' 
+      if @itunes_xml_file_name == 'test/test_library.xml'
         assert_equal(1786, @my_tunes_parser_a.count_unique_values_for_key('track_id'))
         assert_equal(237, @my_tunes_parser_a.count_unique_values_for_key('artist'))
         assert_equal(227, @my_tunes_parser_a.count_unique_values_for_key('album'))

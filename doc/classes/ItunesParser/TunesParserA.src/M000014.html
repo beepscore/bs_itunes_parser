@@ -10,21 +10,21 @@
   <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
 </head>
 <body class="standalone-code">
-  <pre><span class="ruby-comment cmt"># File lib/tunes_parser_a.rb, line 69</span>
+  <pre><span class="ruby-comment cmt"># File lib/tunes_parser_a.rb, line 74</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">seconds_to_time_components</span>(<span class="ruby-identifier">secs</span>)     
-      <span class="ruby-comment cmt"># Ref book Fulton The Ruby Way Second Edition pg 227</span>
-      <span class="ruby-comment cmt"># Ref http://nutrun.com/weblog/ruby-struct/</span>
+      <span class="ruby-comment cmt"># Ref book Fulton The Ruby Way Second Edition pg 227</span>
+      <span class="ruby-comment cmt"># Ref http://nutrun.com/weblog/ruby-struct/</span>
       <span class="ruby-identifier">time_components</span> = <span class="ruby-constant">OpenStruct</span>.<span class="ruby-identifier">new</span>()      
-      <span class="ruby-identifier">time</span> = <span class="ruby-identifier">secs</span>.<span class="ruby-identifier">round</span>                     <span class="ruby-comment cmt"># Round to nearest second</span>
-      
-      <span class="ruby-identifier">time_components</span>.<span class="ruby-identifier">seconds</span> = <span class="ruby-identifier">time</span> <span class="ruby-operator">%</span> <span class="ruby-value">60</span>   <span class="ruby-comment cmt"># Get seconds from modulo remainder</span>
-      <span class="ruby-identifier">time</span> <span class="ruby-operator">/=</span> <span class="ruby-value">60</span>                            <span class="ruby-comment cmt"># Truncate seconds</span>
-      <span class="ruby-identifier">time_components</span>.<span class="ruby-identifier">minutes</span> = <span class="ruby-identifier">time</span> <span class="ruby-operator">%</span> <span class="ruby-value">60</span>   <span class="ruby-comment cmt"># Extract minutes</span>
-      <span class="ruby-identifier">time</span> <span class="ruby-operator">/=</span> <span class="ruby-value">60</span>                            <span class="ruby-comment cmt"># Truncate minutes</span>
-      <span class="ruby-identifier">time_components</span>.<span class="ruby-identifier">hours</span> = <span class="ruby-identifier">time</span> <span class="ruby-operator">%</span> <span class="ruby-value">24</span>     <span class="ruby-comment cmt"># Extract hours</span>
-      <span class="ruby-identifier">time</span> <span class="ruby-operator">/=</span> <span class="ruby-value">24</span>                            <span class="ruby-comment cmt"># Truncate hours</span>
-      <span class="ruby-identifier">time_components</span>.<span class="ruby-identifier">days</span> = <span class="ruby-identifier">time</span>           <span class="ruby-comment cmt"># Days</span>
-      <span class="ruby-identifier">time_components</span>                       <span class="ruby-comment cmt"># return the struct</span>
+      <span class="ruby-identifier">time</span> = <span class="ruby-identifier">secs</span>.<span class="ruby-identifier">round</span>                     <span class="ruby-comment cmt"># Round to nearest second</span>
+
+      <span class="ruby-identifier">time_components</span>.<span class="ruby-identifier">seconds</span> = <span class="ruby-identifier">time</span> <span class="ruby-operator">%</span> <span class="ruby-value">60</span>   <span class="ruby-comment cmt"># Get seconds from modulo remainder</span>
+      <span class="ruby-identifier">time</span> <span class="ruby-operator">/=</span> <span class="ruby-value">60</span>                            <span class="ruby-comment cmt"># Truncate seconds</span>
+      <span class="ruby-identifier">time_components</span>.<span class="ruby-identifier">minutes</span> = <span class="ruby-identifier">time</span> <span class="ruby-operator">%</span> <span class="ruby-value">60</span>   <span class="ruby-comment cmt"># Extract minutes</span>
+      <span class="ruby-identifier">time</span> <span class="ruby-operator">/=</span> <span class="ruby-value">60</span>                            <span class="ruby-comment cmt"># Truncate minutes</span>
+      <span class="ruby-identifier">time_components</span>.<span class="ruby-identifier">hours</span> = <span class="ruby-identifier">time</span> <span class="ruby-operator">%</span> <span class="ruby-value">24</span>     <span class="ruby-comment cmt"># Extract hours</span>
+      <span class="ruby-identifier">time</span> <span class="ruby-operator">/=</span> <span class="ruby-value">24</span>                            <span class="ruby-comment cmt"># Truncate hours</span>
+      <span class="ruby-identifier">time_components</span>.<span class="ruby-identifier">days</span> = <span class="ruby-identifier">time</span>           <span class="ruby-comment cmt"># Days</span>
+      <span class="ruby-identifier">time_components</span>                       <span class="ruby-comment cmt"># return the struct</span>
     <span class="ruby-keyword kw">end</span></pre>
 </body>
 </html>

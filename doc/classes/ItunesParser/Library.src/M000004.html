@@ -15,7 +15,7 @@
 
       <span class="ruby-ivar">@doc</span> = <span class="ruby-constant">Nokogiri</span><span class="ruby-operator">::</span><span class="ruby-constant">XML</span>(<span class="ruby-identifier">itunes_xml_file_name</span>)
 
-      <span class="ruby-comment cmt">#version_key is a Nokogiri::XML::Element</span>
+      <span class="ruby-comment cmt">#version_key is a Nokogiri::XML::Element</span>
       <span class="ruby-identifier">version_key</span> = <span class="ruby-ivar">@doc</span>.<span class="ruby-identifier">xpath</span>(<span class="ruby-value str">'/plist/dict/string[1]'</span>)[<span class="ruby-value">0</span>]
       <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">version</span> = <span class="ruby-identifier">version_key</span>.<span class="ruby-identifier">content</span>
 

@@ -87,9 +87,11 @@
 
       <div class="name-list">
       <a href="#M000013">count_unique_values_for_key</a>&nbsp;&nbsp;
+      <a href="#M000021">find_playlists_for_song</a>&nbsp;&nbsp;
       <a href="#M000017">find_recent_songs</a>&nbsp;&nbsp;
       <a href="#M000011">find_songs_for_key_value</a>&nbsp;&nbsp;
       <a href="#M000012">find_songs_without_key</a>&nbsp;&nbsp;
+      <a href="#M000020">find_track_ids_for_song_name</a>&nbsp;&nbsp;
       <a href="#M000016">library_playing_time</a>&nbsp;&nbsp;
       <a href="#M000009">library_summary</a>&nbsp;&nbsp;
       <a href="#M000019">list_playlists</a>&nbsp;&nbsp;
@@ -170,9 +172,26 @@ argument, and populates the library
           <p>
 Returns the integer number of unique values in the library for a key such
 as &#8216;artist&#8217;, &#8216;album&#8217;, or &#8216;genre&#8217;.
-Sample: <a
-href="TunesParserA.html#M000013">count_unique_values_for_key</a>(&#8216;album&#8217;)
-returns 227
+</p>
+<pre>
+  Sample: count_unique_values_for_key('album') returns 227
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000021" class="method-detail">
+        <a name="M000021"></a>
+
+        <div class="method-heading">
+          <a href="TunesParserA.src/M000021.html" target="Code" class="method-signature"
+            onclick="popupCode('TunesParserA.src/M000021.html');return false;">
+          <span class="method-name">find_playlists_for_song</span><span class="method-args">(song_name)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+returns array of playlist_id for a song
 </p>
         </div>
       </div>
@@ -206,12 +225,13 @@ Returns an array of the names of songs most recently modified
       
         <div class="method-description">
           <p>
-Returns an array of songs that match a_key and a_value. Key and value must
-match library exactly. &#8216;Bryson&#8217; will not find &#8216;Peabo
-Bryson&#8217;. Sample: <a
-href="TunesParserA.html#M000011">find_songs_for_key_value</a>(&#8216;artist&#8217;,
-&#8216;Peabo Bryson Regina Belle, \&amp; David Friedman&#8217;)
+Returns an array of songs that match a_key and a_value.
 </p>
+<pre>
+  a_key must match exactly.
+  a_value will match songs that include the string &quot;a_value&quot;, and is case insensitive.
+  Sample: find_songs_for_key_value('artist', 'ryso') finds songs by &quot;Peabo Bryson&quot;
+</pre>
         </div>
       </div>
 
@@ -229,6 +249,20 @@ href="TunesParserA.html#M000011">find_songs_for_key_value</a>(&#8216;artist&#821
           <p>
 Returns an array of songs that do not contain a_key.
 </p>
+        </div>
+      </div>
+
+      <div id="method-M000020" class="method-detail">
+        <a name="M000020"></a>
+
+        <div class="method-heading">
+          <a href="TunesParserA.src/M000020.html" target="Code" class="method-signature"
+            onclick="popupCode('TunesParserA.src/M000020.html');return false;">
+          <span class="method-name">find_track_ids_for_song_name</span><span class="method-args">(song_name)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
         </div>
       </div>
 
@@ -264,10 +298,11 @@ Returns a string of the library playing time.
       
         <div class="method-description">
           <p>
-Returns a string with a simple description of the library Sample: <a
-href="TunesParserA.html#M000009">library_summary</a> returns Summary:
-library version = 9.0.2, number of songs = 52
+Returns a string with a simple description of the library
 </p>
+<pre>
+  Sample: library_summary returns Summary:  library version = 9.0.2, number of songs = 52
+</pre>
         </div>
       </div>
 
