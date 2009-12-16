@@ -98,6 +98,21 @@ module ItunesParser
       "Playing time = %02d:%02d:%02d:%02d [dd:hh:mm:ss]" % [stc.days, stc.hours, stc.minutes, stc.seconds]
     end
     
+    
+    # Returns an array of the names of songs most recently modified
+    def find_recent_songs
+      songs_with_date_modified_pair = self.lib.songs.reject do |song|
+        (!song.metadata.has_key?('date_modified')) or (song.metadata['date_modified'] == nil)
+      end
+      songs_by_date_modified = songs_with_date_modified_pair.sort do |a, b| 
+        a.metadata['date_modified'] <=> b.metadata['date_modified']
+        # Time.parse(a.metadata['date_modified']) <=> Time.parse(b.metadata['date_modified'])
+      end
+      songs_first = songs_by_date_modified.first(3)
+      song_names = songs_first.collect {|song| song.metadata['name']}   
+    end
+    
+    
     # Returns the number of playlists in the library
     def playlists_length
       self.lib.playlists.length

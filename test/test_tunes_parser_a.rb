@@ -179,7 +179,17 @@ class TestTunesParserA < Test::Unit::TestCase
         assert_equal(@my_tunes_parser_a.song_count, @my_tunes_parser_a.find_songs_without_key('key_without_match').count)
       end
     end
-
+    
+    should "20 find recent songs" do
+      puts "test- find recent songs"
+      if @itunes_xml_file_name == 'test/test_library.xml'
+        assert_equal(["Cecilia Ann", "Rock Music", "Velouria"], @my_tunes_parser_a.find_recent_songs)
+      end
+      if @itunes_xml_file_name == 'test/testing.xml'
+        assert_equal(["Arabian Nights", "Legend Of The Lamp", "One Jump Ahead"], @my_tunes_parser_a.find_recent_songs)
+      end
+    end
+    
     should "30 return the number of playlists" do
       puts "test- return the number of playlists"
       @my_tunes_parser_a.list_playlists
@@ -200,8 +210,6 @@ class TestTunesParserA < Test::Unit::TestCase
         assert_instance_of(ItunesParser::Playlist, @my_tunes_parser_a.lib.playlists['697'])
       end
     end
-
-
 
   end
 end
