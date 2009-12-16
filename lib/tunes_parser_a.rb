@@ -105,8 +105,7 @@ module ItunesParser
         (!song.metadata.has_key?('date_modified')) or (song.metadata['date_modified'] == nil)
       end
       songs_by_date_modified = songs_with_date_modified_pair.sort do |a, b| 
-        a.metadata['date_modified'] <=> b.metadata['date_modified']
-        # Time.parse(a.metadata['date_modified']) <=> Time.parse(b.metadata['date_modified'])
+        b.metadata['date_modified'] <=> a.metadata['date_modified']
       end
       songs_first = songs_by_date_modified.first(3)
       song_names = songs_first.collect {|song| song.metadata['name']}   

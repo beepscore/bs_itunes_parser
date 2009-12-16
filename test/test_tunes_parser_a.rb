@@ -183,10 +183,10 @@ class TestTunesParserA < Test::Unit::TestCase
     should "20 find recent songs" do
       puts "test- find recent songs"
       if @itunes_xml_file_name == 'test/test_library.xml'
-        assert_equal(["Cecilia Ann", "Rock Music", "Velouria"], @my_tunes_parser_a.find_recent_songs)
+        assert_equal(["Cadence Souls 2", "#233: Starting from Scratch", "Translucent"], @my_tunes_parser_a.find_recent_songs)
       end
       if @itunes_xml_file_name == 'test/testing.xml'
-        assert_equal(["Arabian Nights", "Legend Of The Lamp", "One Jump Ahead"], @my_tunes_parser_a.find_recent_songs)
+        assert_equal(["Green Bird", "Dialogue 1-13", "Dialogue 1-12"], @my_tunes_parser_a.find_recent_songs)
       end
     end
     
