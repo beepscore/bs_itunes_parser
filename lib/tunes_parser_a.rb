@@ -124,6 +124,38 @@ module ItunesParser
         puts playlist.to_s_simple
       end
     end
+    
+    def find_track_ids_for_song_name(song_name)
+      #returns an array for which block is not false
+      songs_for_song_name = self.lib.songs.find_all do |song|
+        song.metadata['name'] == song_name 
+      end
+
+      track_ids_for_song_name = songs_for_song_name.collect do |song|
+        song.metadata['track_id']
+      end      
+      puts track_ids_for_song_name
+      track_ids_for_song_name 
+    end
+
+    # returns array of playlist id for a song
+    def find_playlists_for_song(song_name)
+      track_array = self.find_track_ids_for_song_name(song_name)
+      # this array contains matching playlists id for track_ids
+      matching_playlists_array = []
+      # enumerate through each track id for the song name   
+      track_array.each do |a_track_id|
+
+        # enumerate through playlists
+        self.lib.playlists.each_value do |playlist|
+          if playlist.track_ids.include?(a_track_id)
+            matching_playlists_array << playlist.metadata['playlist_id']
+          end
+        end         
+      end        
+      puts matching_playlists_array
+      matching_playlists_array
+    end
    
   end
 end

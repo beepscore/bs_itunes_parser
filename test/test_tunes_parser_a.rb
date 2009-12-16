@@ -210,6 +210,24 @@ class TestTunesParserA < Test::Unit::TestCase
         assert_instance_of(ItunesParser::Playlist, @my_tunes_parser_a.lib.playlists['697'])
       end
     end
+    
+    should "32 return correct playlist track id" do
+      puts "test- return correct playlist track id"
+        assert_equal('66', @my_tunes_parser_a.lib.playlists['697'].track_ids[4])
+    end
+    
+    should "33 find track ids for song name" do
+      puts "test- find_track_ids_for_song_name"
+        assert_equal(['66'], @my_tunes_parser_a.find_track_ids_for_song_name('Arabian Nights'))
+        assert_equal(['80'], @my_tunes_parser_a.find_track_ids_for_song_name('Prince Ali'))
+    end
+    
+    should "34 find_playlists_for_song" do
+      puts "test- find_playlists_for_song"
+        assert_equal(['697', '664'], @my_tunes_parser_a.find_playlists_for_song('Arabian Nights'))
+        assert_equal(['697'], @my_tunes_parser_a.find_playlists_for_song("Aladdin's Word"))
+    end
+    
 
   end
 end
