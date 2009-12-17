@@ -258,5 +258,17 @@ class TestTunesParserA < Test::Unit::TestCase
       end
     end
 
+    should "21 find most played songs" do
+      puts "test- find most played songs"
+      if @itunes_xml_file_name == 'test/test_library.xml'
+        assert_equal(["Neighborhood #1 (Tunnels)", "Neighborhood #2 (Laika)", "Like Eating Glass"], @my_tunes_parser_a.find_most_played_songs)
+      end
+
+      if @itunes_xml_file_name == 'test/testing.xml'
+        assert_equal(["Green Bird", "One Jump Ahead", "Arabian Nights"], @my_tunes_parser_a.find_most_played_songs)
+      end
+    end
+
+
   end
 end

@@ -115,6 +115,22 @@ module ItunesParser
       songs_first = songs_by_date_modified.first(3)
       song_names = songs_first.collect {|song| song.metadata['name']}   
     end
+    
+    
+    # Returns an array of the names of songs with highest play_count
+    def find_most_played_songs
+      songs_with_play_count_pair = self.lib.songs.reject do |song|
+        #this line is describing records it will get rid of
+        (!song.metadata.has_key?('play_count')) or (song.metadata['play_count'] == nil)
+      end
+
+      songs_sorted_by_play_count = songs_with_play_count_pair.sort do |a, b| 
+        b.metadata['play_count'].to_i <=> a.metadata['play_count'].to_i
+      end
+
+      songs_first = songs_sorted_by_play_count.first(3)
+      song_names = songs_first.collect {|song| song.metadata['name']}   
+    end
 
 
     # Returns the number of playlists in the library
