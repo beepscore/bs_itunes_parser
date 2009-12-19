@@ -23,9 +23,10 @@
           <span class="ruby-identifier">key_formatted</span> = <span class="ruby-identifier">key</span>.<span class="ruby-identifier">content</span>.<span class="ruby-identifier">downcase</span>.<span class="ruby-identifier">tr</span>(<span class="ruby-value str">' '</span>, <span class="ruby-value str">'_'</span>)
           <span class="ruby-identifier">song</span>.<span class="ruby-identifier">metadata</span>[<span class="ruby-identifier">key_formatted</span>] = <span class="ruby-identifier">key</span>.<span class="ruby-identifier">next</span>.<span class="ruby-identifier">content</span>
         <span class="ruby-keyword kw">end</span>
-        <span class="ruby-comment cmt"># Append song to the songs array.</span>
-        <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">songs</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">song</span>
-      <span class="ruby-keyword kw">end</span>    
+
+        <span class="ruby-comment cmt"># add song to the songs hash.</span>
+        <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">songs</span>[<span class="ruby-identifier">song</span>.<span class="ruby-identifier">metadata</span>[<span class="ruby-value str">'track_id'</span>]] = <span class="ruby-identifier">song</span>
+      <span class="ruby-keyword kw">end</span>
     <span class="ruby-keyword kw">end</span></pre>
 </body>
 </html>

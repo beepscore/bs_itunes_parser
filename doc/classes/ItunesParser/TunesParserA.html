@@ -86,22 +86,23 @@
       <h3 class="section-bar">Methods</h3>
 
       <div class="name-list">
-      <a href="#M000013">count_unique_values_for_key</a>&nbsp;&nbsp;
-      <a href="#M000018">find_most_played_songs</a>&nbsp;&nbsp;
-      <a href="#M000022">find_playlists_for_song</a>&nbsp;&nbsp;
-      <a href="#M000017">find_recent_songs</a>&nbsp;&nbsp;
+      <a href="#M000015">count_unique_song_values_for_key</a>&nbsp;&nbsp;
+      <a href="#M000020">find_most_played_songs</a>&nbsp;&nbsp;
+      <a href="#M000023">find_playlists_for_song</a>&nbsp;&nbsp;
+      <a href="#M000019">find_recent_songs</a>&nbsp;&nbsp;
       <a href="#M000011">find_songs_for_key_value</a>&nbsp;&nbsp;
-      <a href="#M000012">find_songs_without_key</a>&nbsp;&nbsp;
-      <a href="#M000021">find_track_ids_for_song_name</a>&nbsp;&nbsp;
-      <a href="#M000016">library_playing_time</a>&nbsp;&nbsp;
+      <a href="#M000012">find_songs_for_song_name</a>&nbsp;&nbsp;
+      <a href="#M000014">find_songs_without_key</a>&nbsp;&nbsp;
+      <a href="#M000013">find_track_ids_for_song_name</a>&nbsp;&nbsp;
+      <a href="#M000018">library_playing_time</a>&nbsp;&nbsp;
       <a href="#M000009">library_summary</a>&nbsp;&nbsp;
-      <a href="#M000020">list_playlists</a>&nbsp;&nbsp;
+      <a href="#M000022">list_playlists</a>&nbsp;&nbsp;
       <a href="#M000010">list_songs</a>&nbsp;&nbsp;
       <a href="#M000007">new</a>&nbsp;&nbsp;
-      <a href="#M000019">playlists_length</a>&nbsp;&nbsp;
-      <a href="#M000014">seconds_to_time_components</a>&nbsp;&nbsp;
+      <a href="#M000021">playlists_length</a>&nbsp;&nbsp;
+      <a href="#M000016">seconds_to_time_components</a>&nbsp;&nbsp;
       <a href="#M000008">song_count</a>&nbsp;&nbsp;
-      <a href="#M000015">songs_time_components</a>&nbsp;&nbsp;
+      <a href="#M000017">songs_time_components</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -159,20 +160,20 @@ argument, and populates the library
 
       <h3 class="section-bar">Public Instance methods</h3>
 
-      <div id="method-M000013" class="method-detail">
-        <a name="M000013"></a>
+      <div id="method-M000015" class="method-detail">
+        <a name="M000015"></a>
 
         <div class="method-heading">
-          <a href="TunesParserA.src/M000013.html" target="Code" class="method-signature"
-            onclick="popupCode('TunesParserA.src/M000013.html');return false;">
-          <span class="method-name">count_unique_values_for_key</span><span class="method-args">(a_key)</span>
+          <a href="TunesParserA.src/M000015.html" target="Code" class="method-signature"
+            onclick="popupCode('TunesParserA.src/M000015.html');return false;">
+          <span class="method-name">count_unique_song_values_for_key</span><span class="method-args">(a_key)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p>
-Returns the integer number of unique values in the library for a key such
-as &#8216;artist&#8217;, &#8216;album&#8217;, or &#8216;genre&#8217;.
+Returns the integer number of unique values in songs for a key such as
+&#8216;artist&#8217;, &#8216;album&#8217;, or &#8216;genre&#8217;.
 </p>
 <pre>
   Sample: count_unique_values_for_key('album') returns 227
@@ -180,29 +181,29 @@ as &#8216;artist&#8217;, &#8216;album&#8217;, or &#8216;genre&#8217;.
         </div>
       </div>
 
-      <div id="method-M000018" class="method-detail">
-        <a name="M000018"></a>
+      <div id="method-M000020" class="method-detail">
+        <a name="M000020"></a>
 
         <div class="method-heading">
-          <a href="TunesParserA.src/M000018.html" target="Code" class="method-signature"
-            onclick="popupCode('TunesParserA.src/M000018.html');return false;">
+          <a href="TunesParserA.src/M000020.html" target="Code" class="method-signature"
+            onclick="popupCode('TunesParserA.src/M000020.html');return false;">
           <span class="method-name">find_most_played_songs</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p>
-Returns an array of the names of songs with highest play_count
+Returns a hash of songs with highest play_count
 </p>
         </div>
       </div>
 
-      <div id="method-M000022" class="method-detail">
-        <a name="M000022"></a>
+      <div id="method-M000023" class="method-detail">
+        <a name="M000023"></a>
 
         <div class="method-heading">
-          <a href="TunesParserA.src/M000022.html" target="Code" class="method-signature"
-            onclick="popupCode('TunesParserA.src/M000022.html');return false;">
+          <a href="TunesParserA.src/M000023.html" target="Code" class="method-signature"
+            onclick="popupCode('TunesParserA.src/M000023.html');return false;">
           <span class="method-name">find_playlists_for_song</span><span class="method-args">(song_name)</span>
           </a>
         </div>
@@ -214,19 +215,19 @@ returns array of playlist_id for a song
         </div>
       </div>
 
-      <div id="method-M000017" class="method-detail">
-        <a name="M000017"></a>
+      <div id="method-M000019" class="method-detail">
+        <a name="M000019"></a>
 
         <div class="method-heading">
-          <a href="TunesParserA.src/M000017.html" target="Code" class="method-signature"
-            onclick="popupCode('TunesParserA.src/M000017.html');return false;">
+          <a href="TunesParserA.src/M000019.html" target="Code" class="method-signature"
+            onclick="popupCode('TunesParserA.src/M000019.html');return false;">
           <span class="method-name">find_recent_songs</span><span class="method-args">()</span>
           </a>
         </div>
       
         <div class="method-description">
           <p>
-Returns an array of the names of songs most recently modified
+Returns a hash of the songs most recently modified
 </p>
         </div>
       </div>
@@ -243,7 +244,7 @@ Returns an array of the names of songs most recently modified
       
         <div class="method-description">
           <p>
-Returns an array of songs that match a_key and a_value.
+Returns a hash of songs that match a_key and a_value.
 </p>
 <pre>
   a_key must match exactly.
@@ -259,37 +260,63 @@ Returns an array of songs that match a_key and a_value.
         <div class="method-heading">
           <a href="TunesParserA.src/M000012.html" target="Code" class="method-signature"
             onclick="popupCode('TunesParserA.src/M000012.html');return false;">
+          <span class="method-name">find_songs_for_song_name</span><span class="method-args">(song_name)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Returns a hash of songs that match song_name.
+</p>
+<pre>
+  matches songs that include the song_name string, and is case insensitive.
+</pre>
+        </div>
+      </div>
+
+      <div id="method-M000014" class="method-detail">
+        <a name="M000014"></a>
+
+        <div class="method-heading">
+          <a href="TunesParserA.src/M000014.html" target="Code" class="method-signature"
+            onclick="popupCode('TunesParserA.src/M000014.html');return false;">
           <span class="method-name">find_songs_without_key</span><span class="method-args">(a_key)</span>
           </a>
         </div>
       
         <div class="method-description">
           <p>
-Returns an array of songs that do not contain a_key.
+Returns a hash of songs that do not contain a_key.
 </p>
         </div>
       </div>
 
-      <div id="method-M000021" class="method-detail">
-        <a name="M000021"></a>
+      <div id="method-M000013" class="method-detail">
+        <a name="M000013"></a>
 
         <div class="method-heading">
-          <a href="TunesParserA.src/M000021.html" target="Code" class="method-signature"
-            onclick="popupCode('TunesParserA.src/M000021.html');return false;">
+          <a href="TunesParserA.src/M000013.html" target="Code" class="method-signature"
+            onclick="popupCode('TunesParserA.src/M000013.html');return false;">
           <span class="method-name">find_track_ids_for_song_name</span><span class="method-args">(song_name)</span>
           </a>
         </div>
       
         <div class="method-description">
+          <p>
+Returns an array of track_ids for songs that match song_name.
+</p>
+<pre>
+  matches songs that include the song_name string, and is case insensitive.
+</pre>
         </div>
       </div>
 
-      <div id="method-M000016" class="method-detail">
-        <a name="M000016"></a>
+      <div id="method-M000018" class="method-detail">
+        <a name="M000018"></a>
 
         <div class="method-heading">
-          <a href="TunesParserA.src/M000016.html" target="Code" class="method-signature"
-            onclick="popupCode('TunesParserA.src/M000016.html');return false;">
+          <a href="TunesParserA.src/M000018.html" target="Code" class="method-signature"
+            onclick="popupCode('TunesParserA.src/M000018.html');return false;">
           <span class="method-name">library_playing_time</span><span class="method-args">()</span>
           </a>
         </div>
@@ -324,12 +351,12 @@ Returns a string with a simple description of the library
         </div>
       </div>
 
-      <div id="method-M000020" class="method-detail">
-        <a name="M000020"></a>
+      <div id="method-M000022" class="method-detail">
+        <a name="M000022"></a>
 
         <div class="method-heading">
-          <a href="TunesParserA.src/M000020.html" target="Code" class="method-signature"
-            onclick="popupCode('TunesParserA.src/M000020.html');return false;">
+          <a href="TunesParserA.src/M000022.html" target="Code" class="method-signature"
+            onclick="popupCode('TunesParserA.src/M000022.html');return false;">
           <span class="method-name">list_playlists</span><span class="method-args">()</span>
           </a>
         </div>
@@ -358,12 +385,12 @@ Returns a string with a simple description of the library
         </div>
       </div>
 
-      <div id="method-M000019" class="method-detail">
-        <a name="M000019"></a>
+      <div id="method-M000021" class="method-detail">
+        <a name="M000021"></a>
 
         <div class="method-heading">
-          <a href="TunesParserA.src/M000019.html" target="Code" class="method-signature"
-            onclick="popupCode('TunesParserA.src/M000019.html');return false;">
+          <a href="TunesParserA.src/M000021.html" target="Code" class="method-signature"
+            onclick="popupCode('TunesParserA.src/M000021.html');return false;">
           <span class="method-name">playlists_length</span><span class="method-args">()</span>
           </a>
         </div>
@@ -375,12 +402,12 @@ Returns the number of playlists in the library
         </div>
       </div>
 
-      <div id="method-M000014" class="method-detail">
-        <a name="M000014"></a>
+      <div id="method-M000016" class="method-detail">
+        <a name="M000016"></a>
 
         <div class="method-heading">
-          <a href="TunesParserA.src/M000014.html" target="Code" class="method-signature"
-            onclick="popupCode('TunesParserA.src/M000014.html');return false;">
+          <a href="TunesParserA.src/M000016.html" target="Code" class="method-signature"
+            onclick="popupCode('TunesParserA.src/M000016.html');return false;">
           <span class="method-name">seconds_to_time_components</span><span class="method-args">(secs)</span>
           </a>
         </div>
@@ -409,12 +436,12 @@ Returns the number of songs in the library
         </div>
       </div>
 
-      <div id="method-M000015" class="method-detail">
-        <a name="M000015"></a>
+      <div id="method-M000017" class="method-detail">
+        <a name="M000017"></a>
 
         <div class="method-heading">
-          <a href="TunesParserA.src/M000015.html" target="Code" class="method-signature"
-            onclick="popupCode('TunesParserA.src/M000015.html');return false;">
+          <a href="TunesParserA.src/M000017.html" target="Code" class="method-signature"
+            onclick="popupCode('TunesParserA.src/M000017.html');return false;">
           <span class="method-name">songs_time_components</span><span class="method-args">()</span>
           </a>
         </div>
@@ -422,7 +449,7 @@ Returns the number of songs in the library
         <div class="method-description">
           <p>
 Returns a struct of time components for the songs in the library. See <a
-href="TunesParserA.html#M000014">seconds_to_time_components</a>
+href="TunesParserA.html#M000016">seconds_to_time_components</a>
 </p>
         </div>
       </div>

@@ -5,17 +5,28 @@
 
 <html>
 <head>
-  <title>list_playlists (ItunesParser::TunesParserA)</title>
+  <title>find_most_played_songs (ItunesParser::TunesParserA)</title>
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
   <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
 </head>
 <body class="standalone-code">
-  <pre><span class="ruby-comment cmt"># File lib/tunes_parser_a.rb, line 142</span>
-    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">list_playlists</span>
-      <span class="ruby-comment cmt"># hash .each method requires key-value pair in block, not key only</span>
-      <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">lib</span>.<span class="ruby-identifier">playlists</span>.<span class="ruby-identifier">each_value</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">playlist</span><span class="ruby-operator">|</span>
-        <span class="ruby-identifier">puts</span> <span class="ruby-identifier">playlist</span>.<span class="ruby-identifier">to_s_simple</span>
+  <pre><span class="ruby-comment cmt"># File lib/tunes_parser_a.rb, line 141</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">find_most_played_songs</span>
+      <span class="ruby-comment cmt"># songs_with_play_count_pair is a hash</span>
+      <span class="ruby-identifier">songs_with_play_count_pair</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">lib</span>.<span class="ruby-identifier">songs</span>.<span class="ruby-identifier">reject</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">track_id</span>, <span class="ruby-identifier">song</span><span class="ruby-operator">|</span>
+        <span class="ruby-comment cmt"># reject song if true</span>
+        (<span class="ruby-operator">!</span><span class="ruby-identifier">song</span>.<span class="ruby-identifier">metadata</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-value str">'play_count'</span>)) <span class="ruby-keyword kw">or</span> (<span class="ruby-identifier">song</span>.<span class="ruby-identifier">metadata</span>[<span class="ruby-value str">'play_count'</span>] <span class="ruby-operator">==</span> <span class="ruby-keyword kw">nil</span>)
       <span class="ruby-keyword kw">end</span>
+      <span class="ruby-comment cmt"># sort converts hash to an array of nested pairs. a[0] is a key, a[1] is a value</span>
+      <span class="ruby-identifier">songs_by_play_count</span> = <span class="ruby-identifier">songs_with_play_count_pair</span>.<span class="ruby-identifier">sort</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">a</span>, <span class="ruby-identifier">b</span><span class="ruby-operator">|</span> 
+        <span class="ruby-identifier">b</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">metadata</span>[<span class="ruby-value str">'play_count'</span>].<span class="ruby-identifier">to_i</span> <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">metadata</span>[<span class="ruby-value str">'play_count'</span>].<span class="ruby-identifier">to_i</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">songs_first_nested_array</span> = <span class="ruby-identifier">songs_by_play_count</span>.<span class="ruby-identifier">first</span>(<span class="ruby-value">3</span>)
+      <span class="ruby-identifier">songs_first</span> = {}
+      <span class="ruby-identifier">songs_first_nested_array</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">pair_array</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">songs_first</span>[<span class="ruby-identifier">pair_array</span>[<span class="ruby-value">0</span>]] = <span class="ruby-identifier">songs_first</span>[<span class="ruby-identifier">pair_array</span>[<span class="ruby-value">1</span>]]
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">songs_first</span>
     <span class="ruby-keyword kw">end</span></pre>
 </body>
 </html>

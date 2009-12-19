@@ -5,24 +5,15 @@
 
 <html>
 <head>
-  <title>find_most_played_songs (ItunesParser::TunesParserA)</title>
+  <title>library_playing_time (ItunesParser::TunesParserA)</title>
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
   <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
 </head>
 <body class="standalone-code">
-  <pre><span class="ruby-comment cmt"># File lib/tunes_parser_a.rb, line 121</span>
-    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">find_most_played_songs</span>
-      <span class="ruby-identifier">songs_with_play_count_pair</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">lib</span>.<span class="ruby-identifier">songs</span>.<span class="ruby-identifier">reject</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">song</span><span class="ruby-operator">|</span>
-        <span class="ruby-comment cmt">#this line is describing records it will get rid of</span>
-        (<span class="ruby-operator">!</span><span class="ruby-identifier">song</span>.<span class="ruby-identifier">metadata</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-value str">'play_count'</span>)) <span class="ruby-keyword kw">or</span> (<span class="ruby-identifier">song</span>.<span class="ruby-identifier">metadata</span>[<span class="ruby-value str">'play_count'</span>] <span class="ruby-operator">==</span> <span class="ruby-keyword kw">nil</span>)
-      <span class="ruby-keyword kw">end</span>
-
-      <span class="ruby-identifier">songs_sorted_by_play_count</span> = <span class="ruby-identifier">songs_with_play_count_pair</span>.<span class="ruby-identifier">sort</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">a</span>, <span class="ruby-identifier">b</span><span class="ruby-operator">|</span> 
-        <span class="ruby-identifier">b</span>.<span class="ruby-identifier">metadata</span>[<span class="ruby-value str">'play_count'</span>].<span class="ruby-identifier">to_i</span> <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">metadata</span>[<span class="ruby-value str">'play_count'</span>].<span class="ruby-identifier">to_i</span>
-      <span class="ruby-keyword kw">end</span>
-
-      <span class="ruby-identifier">songs_first</span> = <span class="ruby-identifier">songs_sorted_by_play_count</span>.<span class="ruby-identifier">first</span>(<span class="ruby-value">3</span>)
-      <span class="ruby-identifier">song_names</span> = <span class="ruby-identifier">songs_first</span>.<span class="ruby-identifier">collect</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">song</span><span class="ruby-operator">|</span> <span class="ruby-identifier">song</span>.<span class="ruby-identifier">metadata</span>[<span class="ruby-value str">'name'</span>]}   
+  <pre><span class="ruby-comment cmt"># File lib/tunes_parser_a.rb, line 115</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">library_playing_time</span>
+      <span class="ruby-identifier">stc</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">songs_time_components</span>
+      <span class="ruby-value str">&quot;Playing time = %02d:%02d:%02d:%02d [dd:hh:mm:ss]&quot;</span> <span class="ruby-operator">%</span> [<span class="ruby-identifier">stc</span>.<span class="ruby-identifier">days</span>, <span class="ruby-identifier">stc</span>.<span class="ruby-identifier">hours</span>, <span class="ruby-identifier">stc</span>.<span class="ruby-identifier">minutes</span>, <span class="ruby-identifier">stc</span>.<span class="ruby-identifier">seconds</span>]
     <span class="ruby-keyword kw">end</span></pre>
 </body>
 </html>
