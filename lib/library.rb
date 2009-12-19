@@ -12,7 +12,7 @@ module ItunesParser
 
     # The version of the iTunes library e.g. 9.0.2
     attr_accessor :version
-    # An array of songs
+    # A hash of songs.  Key is track_id, value is the song.
     attr_accessor :songs
     # A hash of playlists.  Key is playlist_id, value is the playlist
     attr_accessor :playlists
@@ -20,7 +20,7 @@ module ItunesParser
     # Creates an empty library.  To populate the library, call the parse method.
     def initialize
       @version = ''
-      @songs = []
+      @songs = {}
       @playlists = {}
     end
 
@@ -51,9 +51,10 @@ module ItunesParser
           key_formatted = key.content.downcase.tr(' ', '_')
           song.metadata[key_formatted] = key.next.content
         end
-        # Append song to the songs array.
-        self.songs << song
-      end    
+
+        # add song to the songs hash.
+        self.songs[song.metadata['track_id']] = song
+      end
     end # parse_songs
     
 

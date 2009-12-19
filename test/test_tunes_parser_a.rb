@@ -38,50 +38,41 @@ class TestTunesParserA < Test::Unit::TestCase
 
     should "04 provide correct metadata values" do
       puts "test- provide correct metadata values"
-      # first song in the songs array
-      first_song_in_songs = @my_tunes_parser_a.lib.songs[0]
-      puts "first song in songs = #{first_song_in_songs.inspect}"
       puts "" 
       if @itunes_xml_file_name == 'test/test_library.xml'
-        assert_instance_of(ItunesParser::Song, first_song_in_songs)
-        assert_equal("Dan Sartain", first_song_in_songs.metadata['artist'])
-        assert_equal("Totem Pole", first_song_in_songs.metadata['name'])
-        assert_equal("2006", first_song_in_songs.metadata['year'])
-        assert_equal("MPEG audio file", first_song_in_songs.metadata['kind'])
+        a_song = @my_tunes_parser_a.lib.songs['1018']
+        assert_instance_of(ItunesParser::Song, a_song)
+        assert_equal("Dan Sartain", a_song.metadata['artist'])
+        assert_equal("Totem Pole", a_song.metadata['name'])
+        assert_equal("2006", a_song.metadata['year'])
+        assert_equal("MPEG audio file", a_song.metadata['kind'])
         # size in bytes
-        assert_equal("5191680", first_song_in_songs.metadata['size'])
+        assert_equal("5191680", a_song.metadata['size'])
         # sample rate in Hz
-        assert_equal("44100", first_song_in_songs.metadata['sample_rate'])
+        assert_equal("44100", a_song.metadata['sample_rate'])
         # total time in msec
-        assert_equal("180035", first_song_in_songs.metadata['total_time'])
+        assert_equal("180035", a_song.metadata['total_time'])
       end
 
       if @itunes_xml_file_name == 'test/testing.xml'
-        assert_instance_of(ItunesParser::Song, first_song_in_songs)
-        assert_equal("Bruce Adler", first_song_in_songs.metadata['artist'])
-        assert_equal("Arabian Nights", first_song_in_songs.metadata['name'])
-        assert_equal("1992", first_song_in_songs.metadata['year'])
-        assert_equal("MPEG audio file", first_song_in_songs.metadata['kind'])
+        a_song = @my_tunes_parser_a.lib.songs['66']
+        assert_instance_of(ItunesParser::Song, a_song)
+        assert_equal("Bruce Adler", a_song.metadata['artist'])
+        assert_equal("Arabian Nights", a_song.metadata['name'])
+        assert_equal("1992", a_song.metadata['year'])
+        assert_equal("MPEG audio file", a_song.metadata['kind'])
         # size in bytes
-        assert_equal("1898624", first_song_in_songs.metadata['size'])
+        assert_equal("1898624", a_song.metadata['size'])
         # sample rate in Hz
-        assert_equal("44100", first_song_in_songs.metadata['sample_rate'])
+        assert_equal("44100", a_song.metadata['sample_rate'])
         # total time in msec
-        assert_equal("79725", first_song_in_songs.metadata['total_time'])
+        assert_equal("79725", a_song.metadata['total_time'])
       end
 
     end
 
-    should "05 last song is a song" do
-      puts "test- last song is a song"
-      puts ""
-      index_of_last_song = (@my_tunes_parser_a.song_count - 1)
-      last_song = @my_tunes_parser_a.lib.songs[index_of_last_song]
-      puts "last song = #{last_song.inspect}"
-      assert_instance_of(ItunesParser::Song, last_song)
-    end
 
-    # should "06 list songs" do
+    # should "05 list songs" do
     #   puts "test- list songs"
     #   @my_tunes_parser_a.list_songs
     #   assert_not_nil(true)
@@ -90,7 +81,12 @@ class TestTunesParserA < Test::Unit::TestCase
 
     should "06 return a string describing song" do
       puts "test- return a string describing song"
-      a_song = @my_tunes_parser_a.lib.songs[6]
+      if @itunes_xml_file_name == 'test/test_library.xml'
+        a_song = @my_tunes_parser_a.lib.songs['1018']
+     end
+      if @itunes_xml_file_name == 'test/testing.xml'
+        a_song = @my_tunes_parser_a.lib.songs['66']
+     end
       puts a_song.to_s_simple
       assert_instance_of(String, a_song.to_s_simple)
     end

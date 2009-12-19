@@ -30,17 +30,17 @@ module ItunesParser
 
     # "Puts" the simple description for each song in the library
     def list_songs 
-      self.lib.songs.each do |song|
+      self.lib.songs.each_value do |song|
         puts song.to_s_simple
       end
     end
 
     # Returns an array of songs that match a_key and a_value.
-    #   a_key must match exactly. 
+    #   a_key must match exactly.
     #   a_value will match songs that include the string "a_value", and is case insensitive.
     #   Sample: find_songs_for_key_value('artist', 'ryso') finds songs by "Peabo Bryson"
     def find_songs_for_key_value(a_key, a_value)
-
+      # FIXME:  need to change this to work on a hash instead of an array
       songs_for_key_value = self.lib.songs.find_all do |song|
         # skip song if it has a nil value.  Otherwise string methods downcase and include would fail
         if (song.metadata[a_key] != nil)
@@ -90,7 +90,7 @@ module ItunesParser
     # Returns a struct of time components for the songs in the library.  See seconds_to_time_components
     def songs_time_components
       total_songs_time = 0
-      self.lib.songs.each do |song|
+      self.lib.songs.each_value do |song|
         total_songs_time += (song.metadata['total_time'].to_f / 1000.0)
       end
       seconds_to_time_components(total_songs_time)     
