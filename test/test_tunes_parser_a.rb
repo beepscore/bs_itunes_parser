@@ -113,18 +113,18 @@ class TestTunesParserA < Test::Unit::TestCase
       end
     end
 
-    should "08 count unique values for key" do
-      puts "test- count unique values for key"
+    should "08 count unique song values for key" do
+      puts "test- count unique song values for key"
       if @itunes_xml_file_name == 'test/test_library.xml'
-        assert_equal(1786, @my_tunes_parser_a.count_unique_values_for_key('track_id'))
-        assert_equal(237, @my_tunes_parser_a.count_unique_values_for_key('artist'))
-        assert_equal(227, @my_tunes_parser_a.count_unique_values_for_key('album'))
+        assert_equal(1786, @my_tunes_parser_a.count_unique_song_values_for_key('track_id'))
+        assert_equal(237, @my_tunes_parser_a.count_unique_song_values_for_key('artist'))
+        assert_equal(227, @my_tunes_parser_a.count_unique_song_values_for_key('album'))
       end
 
       if @itunes_xml_file_name == 'test/testing.xml'
-        assert_equal(52, @my_tunes_parser_a.count_unique_values_for_key('track_id'))
-        assert_equal(7, @my_tunes_parser_a.count_unique_values_for_key('artist'))
-        assert_equal(2, @my_tunes_parser_a.count_unique_values_for_key('album'))
+        assert_equal(52, @my_tunes_parser_a.count_unique_song_values_for_key('track_id'))
+        assert_equal(7, @my_tunes_parser_a.count_unique_song_values_for_key('artist'))
+        assert_equal(2, @my_tunes_parser_a.count_unique_song_values_for_key('album'))
       end
     end
 
@@ -217,7 +217,20 @@ class TestTunesParserA < Test::Unit::TestCase
       end
     end
 
-    should "14 find track ids for song name" do
+    should "14a find songs for song name" do
+      puts "test- find_songs_for_song_name"
+      if @itunes_xml_file_name == 'test/test_library.xml'
+        assert_equal(['1040'], @my_tunes_parser_a.find_songs_for_song_name('built_for_war_3-19_master').keys)
+        assert_equal(['1500'], @my_tunes_parser_a.find_songs_for_song_name('Shrinz (Quadrant Remix) - FINAL').keys)
+      end
+
+      if @itunes_xml_file_name == 'test/testing.xml'
+        assert_equal(['66'], @my_tunes_parser_a.find_songs_for_song_name('Arabian Nights').keys)
+        assert_equal(['80', '86'], @my_tunes_parser_a.find_songs_for_song_name('Prince Ali').keys)
+      end
+    end
+
+    should "14b find track ids for song name" do
       puts "test- find_track_ids_for_song_name"
       if @itunes_xml_file_name == 'test/test_library.xml'
         assert_equal(['1040'], @my_tunes_parser_a.find_track_ids_for_song_name('built_for_war_3-19_master'))
@@ -226,7 +239,7 @@ class TestTunesParserA < Test::Unit::TestCase
 
       if @itunes_xml_file_name == 'test/testing.xml'
         assert_equal(['66'], @my_tunes_parser_a.find_track_ids_for_song_name('Arabian Nights'))
-        assert_equal(['80'], @my_tunes_parser_a.find_track_ids_for_song_name('Prince Ali'))
+        assert_equal(['80', '86'], @my_tunes_parser_a.find_track_ids_for_song_name('Prince Ali'))
       end
     end
 

@@ -35,34 +35,48 @@ module ItunesParser
       end
     end
 
-    # Returns an array of songs that match a_key and a_value.
+    # Returns a hash of songs that match a_key and a_value.
     #   a_key must match exactly.
     #   a_value will match songs that include the string "a_value", and is case insensitive.
     #   Sample: find_songs_for_key_value('artist', 'ryso') finds songs by "Peabo Bryson"
     def find_songs_for_key_value(a_key, a_value)
-      # FIXME:  need to change this to work on a hash instead of an array
-      songs_for_key_value = self.lib.songs.find_all do |song|
-        # skip song if it has a nil value.  Otherwise string methods downcase and include would fail
+      songs_for_key_value = {}
+      self.lib.songs.each do |track_id, song|
+        # skip song if value is nil.  Otherwise string methods downcase and include would fail
         if (song.metadata[a_key] != nil)
-          song.metadata[a_key].downcase.include?(a_value.downcase)
+          if (song.metadata[a_key].downcase.include?(a_value.downcase))
+            songs_for_key_value[track_id] = song
+          end
         end
       end
       songs_for_key_value
     end
-
-    # Returns an array of songs that do not contain a_key.    
-    def find_songs_without_key(a_key)
-      songs_without_key =  self.lib.songs.find_all do |song|
-        song.metadata.has_key?(a_key) == false
-      end
-      songs_without_key
+    
+    # Returns a hash of songs that match song_name.
+    #   matches songs that include the song_name string, and is case insensitive.
+    def find_songs_for_song_name(song_name)
+      find_songs_for_key_value('name', song_name)
     end
 
-    # Returns the integer number of unique values in the library for a key such as 'artist', 'album', or 'genre'. 
+    # Returns an array of track_ids for songs that match song_name.
+    #   matches songs that include the song_name string, and is case insensitive.
+    def find_track_ids_for_song_name(song_name)
+      find_songs_for_song_name(song_name).keys
+    end
+
+
+    # Returns a hash of songs that do not contain a_key.
+    def find_songs_without_key(a_key)
+      songs_without_key =  self.lib.songs.reject do |track_id, song|
+        song.metadata.has_key?(a_key)
+      end
+    end
+
+    # Returns the integer number of unique values in songs for a key such as 'artist', 'album', or 'genre'. 
     #   Sample: count_unique_values_for_key('album') returns 227
-    def count_unique_values_for_key(a_key)
+    def count_unique_song_values_for_key(a_key)
       values_array = [] #array of values
-      self.lib.songs.each do |song|
+      self.lib.songs.each_value do |song|
         values_array << song.metadata[a_key]
       end
       unique_count = values_array.uniq.count
@@ -115,8 +129,8 @@ module ItunesParser
       songs_first = songs_by_date_modified.first(3)
       song_names = songs_first.collect {|song| song.metadata['name']}   
     end
-    
-    
+
+
     # Returns an array of the names of songs with highest play_count
     def find_most_played_songs
       songs_with_play_count_pair = self.lib.songs.reject do |song|
@@ -144,19 +158,6 @@ module ItunesParser
       self.lib.playlists.each_value do |playlist|
         puts playlist.to_s_simple
       end
-    end
-
-    def find_track_ids_for_song_name(song_name)
-      #returns an array for which block is not false
-      songs_for_song_name = self.lib.songs.find_all do |song|
-        song.metadata['name'] == song_name 
-      end
-
-      track_ids_for_song_name = songs_for_song_name.collect do |song|
-        song.metadata['track_id']
-      end      
-      puts track_ids_for_song_name
-      track_ids_for_song_name 
     end
 
     # returns array of playlist_id for a song
