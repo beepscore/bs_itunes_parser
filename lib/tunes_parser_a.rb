@@ -51,7 +51,7 @@ module ItunesParser
       end
       songs_for_key_value
     end
-    
+
     # Returns a hash of songs that match song_name.
     #   matches songs that include the song_name string, and is case insensitive.
     def find_songs_for_song_name(song_name)
@@ -118,34 +118,43 @@ module ItunesParser
     end
 
 
-    # Returns an array of the names of songs most recently modified
+    # Returns a hash of the songs most recently modified
     def find_recent_songs
-      songs_with_date_modified_pair = self.lib.songs.reject do |song|
+      # songs_with_date_modified_pair is a hash
+      songs_with_date_modified_pair = self.lib.songs.reject do |track_id, song|
+        # reject song if true
         (!song.metadata.has_key?('date_modified')) or (song.metadata['date_modified'] == nil)
       end
+      # sort converts hash to an array of nested pairs. a[0] is a key, a[1] is a value
       songs_by_date_modified = songs_with_date_modified_pair.sort do |a, b| 
-        b.metadata['date_modified'] <=> a.metadata['date_modified']
+        b[1].metadata['date_modified'] <=> a[1].metadata['date_modified']
       end
-      songs_first = songs_by_date_modified.first(3)
-      song_names = songs_first.collect {|song| song.metadata['name']}   
+      songs_first_nested_array = songs_by_date_modified.first(3)
+      songs_first = {}
+      songs_first_nested_array.each do |pair_array|
+        songs_first[pair_array[0]] = songs_first[pair_array[1]]
+      end
+      songs_first
     end
 
-
-    # Returns an array of the names of songs with highest play_count
+    # Returns a hash of songs with highest play_count
     def find_most_played_songs
-      songs_with_play_count_pair = self.lib.songs.reject do |song|
-        #this line is describing records it will get rid of
+      # songs_with_play_count_pair is a hash
+      songs_with_play_count_pair = self.lib.songs.reject do |track_id, song|
+        # reject song if true
         (!song.metadata.has_key?('play_count')) or (song.metadata['play_count'] == nil)
       end
-
-      songs_sorted_by_play_count = songs_with_play_count_pair.sort do |a, b| 
-        b.metadata['play_count'].to_i <=> a.metadata['play_count'].to_i
+      # sort converts hash to an array of nested pairs. a[0] is a key, a[1] is a value
+      songs_by_play_count = songs_with_play_count_pair.sort do |a, b| 
+        b[1].metadata['play_count'].to_i <=> a[1].metadata['play_count'].to_i
       end
-
-      songs_first = songs_sorted_by_play_count.first(3)
-      song_names = songs_first.collect {|song| song.metadata['name']}   
+      songs_first_nested_array = songs_by_play_count.first(3)
+      songs_first = {}
+      songs_first_nested_array.each do |pair_array|
+        songs_first[pair_array[0]] = songs_first[pair_array[1]]
+      end
+      songs_first
     end
-
 
     # Returns the number of playlists in the library
     def playlists_length
