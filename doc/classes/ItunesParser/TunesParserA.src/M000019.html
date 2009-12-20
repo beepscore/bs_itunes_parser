@@ -5,23 +5,35 @@
 
 <html>
 <head>
-  <title>find_recent_songs (ItunesParser::TunesParserA)</title>
+  <title>find_songs_by_value_for_key (ItunesParser::TunesParserA)</title>
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
   <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
 </head>
 <body class="standalone-code">
-  <pre><span class="ruby-comment cmt"># File lib/tunes_parser_a.rb, line 122</span>
-    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">find_recent_songs</span>
-      <span class="ruby-comment cmt"># songs_with_date_modified_pair is a hash</span>
-      <span class="ruby-identifier">songs_with_date_modified_pair</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">lib</span>.<span class="ruby-identifier">songs</span>.<span class="ruby-identifier">reject</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">track_id</span>, <span class="ruby-identifier">song</span><span class="ruby-operator">|</span>
-        <span class="ruby-comment cmt"># reject song if true</span>
-        (<span class="ruby-operator">!</span><span class="ruby-identifier">song</span>.<span class="ruby-identifier">metadata</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-value str">'date_modified'</span>)) <span class="ruby-keyword kw">or</span> (<span class="ruby-identifier">song</span>.<span class="ruby-identifier">metadata</span>[<span class="ruby-value str">'date_modified'</span>] <span class="ruby-operator">==</span> <span class="ruby-keyword kw">nil</span>)
+  <pre><span class="ruby-comment cmt"># File lib/tunes_parser_a.rb, line 123</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">find_songs_by_value_for_key</span>(<span class="ruby-identifier">a_key</span>, <span class="ruby-identifier">sort_as_number</span>, <span class="ruby-identifier">order_is_ascending</span>)
+      <span class="ruby-comment cmt"># songs_with_key_value_pair is a hash.</span>
+      <span class="ruby-identifier">songs_with_key_value_pair</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">lib</span>.<span class="ruby-identifier">songs</span>.<span class="ruby-identifier">reject</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">track_id</span>, <span class="ruby-identifier">song</span><span class="ruby-operator">|</span>
+        <span class="ruby-comment cmt"># reject song if it doesn't have a_key or if the value is nil</span>
+        (<span class="ruby-operator">!</span><span class="ruby-identifier">song</span>.<span class="ruby-identifier">metadata</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">a_key</span>)) <span class="ruby-keyword kw">or</span> (<span class="ruby-identifier">song</span>.<span class="ruby-identifier">metadata</span>[<span class="ruby-identifier">a_key</span>] <span class="ruby-operator">==</span> <span class="ruby-keyword kw">nil</span>)
       <span class="ruby-keyword kw">end</span>
-      <span class="ruby-comment cmt"># sort converts hash to an array of nested pairs. a[0] is a key, a[1] is a value</span>
-      <span class="ruby-identifier">songs_by_date_modified</span> = <span class="ruby-identifier">songs_with_date_modified_pair</span>.<span class="ruby-identifier">sort</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">a</span>, <span class="ruby-identifier">b</span><span class="ruby-operator">|</span> 
-        <span class="ruby-identifier">b</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">metadata</span>[<span class="ruby-value str">'date_modified'</span>] <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">metadata</span>[<span class="ruby-value str">'date_modified'</span>]
+      <span class="ruby-comment cmt"># hash.sort returns an array of nested pairs. a[0] is a key, a[1] is a value</span>
+      <span class="ruby-identifier">songs_by_value_for_key</span> = <span class="ruby-identifier">songs_with_key_value_pair</span>.<span class="ruby-identifier">sort</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">a</span>, <span class="ruby-identifier">b</span><span class="ruby-operator">|</span> 
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">order_is_ascending</span>
+          <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">sort_as_number</span>
+            <span class="ruby-identifier">a</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">metadata</span>[<span class="ruby-identifier">a_key</span>].<span class="ruby-identifier">to_i</span> <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">b</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">metadata</span>[<span class="ruby-identifier">a_key</span>].<span class="ruby-identifier">to_i</span>
+          <span class="ruby-keyword kw">else</span>
+            <span class="ruby-identifier">a</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">metadata</span>[<span class="ruby-identifier">a_key</span>] <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">b</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">metadata</span>[<span class="ruby-identifier">a_key</span>]
+          <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">else</span> <span class="ruby-comment cmt"># order is descending</span>
+          <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">sort_as_number</span>
+            <span class="ruby-identifier">b</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">metadata</span>[<span class="ruby-identifier">a_key</span>].<span class="ruby-identifier">to_i</span> <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">metadata</span>[<span class="ruby-identifier">a_key</span>].<span class="ruby-identifier">to_i</span>
+          <span class="ruby-keyword kw">else</span>
+            <span class="ruby-identifier">b</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">metadata</span>[<span class="ruby-identifier">a_key</span>] <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">metadata</span>[<span class="ruby-identifier">a_key</span>]
+          <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span>
       <span class="ruby-keyword kw">end</span>
-      <span class="ruby-identifier">songs_first_nested_array</span> = <span class="ruby-identifier">songs_by_date_modified</span>.<span class="ruby-identifier">first</span>(<span class="ruby-value">3</span>)
+      <span class="ruby-identifier">songs_first_nested_array</span> = <span class="ruby-identifier">songs_by_value_for_key</span>.<span class="ruby-identifier">first</span>(<span class="ruby-value">3</span>)
       <span class="ruby-identifier">songs_first</span> = {}
       <span class="ruby-identifier">songs_first_nested_array</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">pair_array</span><span class="ruby-operator">|</span>
         <span class="ruby-identifier">songs_first</span>[<span class="ruby-identifier">pair_array</span>[<span class="ruby-value">0</span>]] = <span class="ruby-identifier">songs_first</span>[<span class="ruby-identifier">pair_array</span>[<span class="ruby-value">1</span>]]
