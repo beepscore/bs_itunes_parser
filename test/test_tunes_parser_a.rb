@@ -29,10 +29,10 @@ class TestTunesParserA < Test::Unit::TestCase
     should "03 return the number of songs" do
       puts "test- return the number of songs"
       if @itunes_xml_file_name == 'test/test_library.xml'
-        assert_equal(1786, @my_tunes_parser_a.song_count)
+        assert_equal(1786, @my_tunes_parser_a.songs_count)
       end
       if @itunes_xml_file_name == 'test/testing.xml' 
-        assert_equal(52, @my_tunes_parser_a.song_count)
+        assert_equal(52, @my_tunes_parser_a.songs_count)
       end
     end
 
@@ -174,13 +174,13 @@ class TestTunesParserA < Test::Unit::TestCase
       if @itunes_xml_file_name == 'test/test_library.xml'
         assert_equal(302, @my_tunes_parser_a.find_songs_without_key('album').count)
         assert_equal(542, @my_tunes_parser_a.find_songs_without_key('genre').count)
-        assert_equal(@my_tunes_parser_a.song_count, @my_tunes_parser_a.find_songs_without_key('key_without_match').count)
+        assert_equal(@my_tunes_parser_a.songs_count, @my_tunes_parser_a.find_songs_without_key('key_without_match').count)
       end
 
       if @itunes_xml_file_name == 'test/testing.xml'
         assert_equal(0, @my_tunes_parser_a.find_songs_without_key('album').count)
         assert_equal(31, @my_tunes_parser_a.find_songs_without_key('comments').count)
-        assert_equal(@my_tunes_parser_a.song_count, @my_tunes_parser_a.find_songs_without_key('key_without_match').count)
+        assert_equal(@my_tunes_parser_a.songs_count, @my_tunes_parser_a.find_songs_without_key('key_without_match').count)
       end
     end
 

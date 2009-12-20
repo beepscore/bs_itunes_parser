@@ -18,14 +18,14 @@ module ItunesParser
     end
 
     # Returns the number of songs in the library
-    def song_count
+    def songs_count
       self.lib.songs.count
     end
 
     # Returns a string with a simple description of the library
     #   Sample: library_summary returns Summary:  library version = 9.0.2, number of songs = 52
     def library_summary
-      "Summary:  library version = #{self.lib.version}, number of songs = #{self.song_count}"
+      "Summary:  library version = #{self.lib.version}, number of songs = #{self.songs_count}"
     end    
 
     # "Puts" the simple description for each song in the library
