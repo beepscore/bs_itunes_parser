@@ -119,7 +119,8 @@ module ItunesParser
 
 
     # Returns a hash of the songs, sorted by the value of their metadata key "a_key".
-    #   ascending_flag=false sorts in descending order
+    #   sort_as_number = true converts value to float
+    #   order_is_ascending = false sorts in descending order
     def find_songs_by_value_for_key(a_key, sort_as_number, order_is_ascending)
       # songs_with_key_value_pair is a hash.
       songs_with_key_value_pair = self.lib.songs.reject do |track_id, song|
@@ -130,13 +131,13 @@ module ItunesParser
       songs_by_value_for_key = songs_with_key_value_pair.sort do |a, b| 
         if order_is_ascending
           if sort_as_number
-            a[1].metadata[a_key].to_i <=> b[1].metadata[a_key].to_i
+            a[1].metadata[a_key].to_f <=> b[1].metadata[a_key].to_f
           else
             a[1].metadata[a_key] <=> b[1].metadata[a_key]
           end
         else # order is descending
           if sort_as_number
-            b[1].metadata[a_key].to_i <=> a[1].metadata[a_key].to_i
+            b[1].metadata[a_key].to_f <=> a[1].metadata[a_key].to_f
           else
             b[1].metadata[a_key] <=> a[1].metadata[a_key]
           end

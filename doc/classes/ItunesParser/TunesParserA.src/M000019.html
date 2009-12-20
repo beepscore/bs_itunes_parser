@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
 </head>
 <body class="standalone-code">
-  <pre><span class="ruby-comment cmt"># File lib/tunes_parser_a.rb, line 123</span>
+  <pre><span class="ruby-comment cmt"># File lib/tunes_parser_a.rb, line 124</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">find_songs_by_value_for_key</span>(<span class="ruby-identifier">a_key</span>, <span class="ruby-identifier">sort_as_number</span>, <span class="ruby-identifier">order_is_ascending</span>)
       <span class="ruby-comment cmt"># songs_with_key_value_pair is a hash.</span>
       <span class="ruby-identifier">songs_with_key_value_pair</span> = <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">lib</span>.<span class="ruby-identifier">songs</span>.<span class="ruby-identifier">reject</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">track_id</span>, <span class="ruby-identifier">song</span><span class="ruby-operator">|</span>
@@ -21,13 +21,13 @@
       <span class="ruby-identifier">songs_by_value_for_key</span> = <span class="ruby-identifier">songs_with_key_value_pair</span>.<span class="ruby-identifier">sort</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">a</span>, <span class="ruby-identifier">b</span><span class="ruby-operator">|</span> 
         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">order_is_ascending</span>
           <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">sort_as_number</span>
-            <span class="ruby-identifier">a</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">metadata</span>[<span class="ruby-identifier">a_key</span>].<span class="ruby-identifier">to_i</span> <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">b</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">metadata</span>[<span class="ruby-identifier">a_key</span>].<span class="ruby-identifier">to_i</span>
+            <span class="ruby-identifier">a</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">metadata</span>[<span class="ruby-identifier">a_key</span>].<span class="ruby-identifier">to_f</span> <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">b</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">metadata</span>[<span class="ruby-identifier">a_key</span>].<span class="ruby-identifier">to_f</span>
           <span class="ruby-keyword kw">else</span>
             <span class="ruby-identifier">a</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">metadata</span>[<span class="ruby-identifier">a_key</span>] <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">b</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">metadata</span>[<span class="ruby-identifier">a_key</span>]
           <span class="ruby-keyword kw">end</span>
         <span class="ruby-keyword kw">else</span> <span class="ruby-comment cmt"># order is descending</span>
           <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">sort_as_number</span>
-            <span class="ruby-identifier">b</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">metadata</span>[<span class="ruby-identifier">a_key</span>].<span class="ruby-identifier">to_i</span> <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">metadata</span>[<span class="ruby-identifier">a_key</span>].<span class="ruby-identifier">to_i</span>
+            <span class="ruby-identifier">b</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">metadata</span>[<span class="ruby-identifier">a_key</span>].<span class="ruby-identifier">to_f</span> <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">metadata</span>[<span class="ruby-identifier">a_key</span>].<span class="ruby-identifier">to_f</span>
           <span class="ruby-keyword kw">else</span>
             <span class="ruby-identifier">b</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">metadata</span>[<span class="ruby-identifier">a_key</span>] <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">metadata</span>[<span class="ruby-identifier">a_key</span>]
           <span class="ruby-keyword kw">end</span>
