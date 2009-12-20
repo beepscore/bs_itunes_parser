@@ -255,6 +255,18 @@ class TestTunesParserA < Test::Unit::TestCase
       end
     end
 
+
+    should "19 find songs_by_value_for_key" do
+      puts "test- find songs_by_value_for_key"
+      if @itunes_xml_file_name == 'test/test_library.xml'
+        assert_equal(["1056", "1058", "4120"], @my_tunes_parser_a.find_songs_by_value_for_key('total_time', true, true).keys)
+      end
+      if @itunes_xml_file_name == 'test/testing.xml'
+        assert_equal(["246", "98", "236"], @my_tunes_parser_a.find_songs_by_value_for_key('total_time', true, false).keys)
+      end
+    end
+
+
     should "20 find recent songs" do
       puts "test- find recent songs"
       if @itunes_xml_file_name == 'test/test_library.xml'

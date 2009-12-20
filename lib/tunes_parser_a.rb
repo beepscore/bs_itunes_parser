@@ -118,18 +118,31 @@ module ItunesParser
     end
 
 
-    # Returns a hash of the songs most recently modified
-    def find_recent_songs
-      # songs_with_date_modified_pair is a hash
-      songs_with_date_modified_pair = self.lib.songs.reject do |track_id, song|
-        # reject song if true
-        (!song.metadata.has_key?('date_modified')) or (song.metadata['date_modified'] == nil)
+    # Returns a hash of the songs, sorted by the value of their metadata key "a_key".
+    #   ascending_flag=false sorts in descending order
+    def find_songs_by_value_for_key(a_key, sort_as_number, order_is_ascending)
+      # songs_with_key_value_pair is a hash.
+      songs_with_key_value_pair = self.lib.songs.reject do |track_id, song|
+        # reject song if it doesn't have a_key or if the value is nil
+        (!song.metadata.has_key?(a_key)) or (song.metadata[a_key] == nil)
       end
-      # sort converts hash to an array of nested pairs. a[0] is a key, a[1] is a value
-      songs_by_date_modified = songs_with_date_modified_pair.sort do |a, b| 
-        b[1].metadata['date_modified'] <=> a[1].metadata['date_modified']
+      # hash.sort returns an array of nested pairs. a[0] is a key, a[1] is a value
+      songs_by_value_for_key = songs_with_key_value_pair.sort do |a, b| 
+        if order_is_ascending
+          if sort_as_number
+            a[1].metadata[a_key].to_i <=> b[1].metadata[a_key].to_i
+          else
+            a[1].metadata[a_key] <=> b[1].metadata[a_key]
+          end
+        else # order is descending
+          if sort_as_number
+            b[1].metadata[a_key].to_i <=> a[1].metadata[a_key].to_i
+          else
+            b[1].metadata[a_key] <=> a[1].metadata[a_key]
+          end
+        end
       end
-      songs_first_nested_array = songs_by_date_modified.first(3)
+      songs_first_nested_array = songs_by_value_for_key.first(3)
       songs_first = {}
       songs_first_nested_array.each do |pair_array|
         songs_first[pair_array[0]] = songs_first[pair_array[1]]
@@ -137,23 +150,14 @@ module ItunesParser
       songs_first
     end
 
+    # Returns a hash of the songs most recently modified
+    def find_recent_songs
+      find_songs_by_value_for_key('date_modified', false, false)     
+    end
+
     # Returns a hash of songs with highest play_count
     def find_most_played_songs
-      # songs_with_play_count_pair is a hash
-      songs_with_play_count_pair = self.lib.songs.reject do |track_id, song|
-        # reject song if true
-        (!song.metadata.has_key?('play_count')) or (song.metadata['play_count'] == nil)
-      end
-      # sort converts hash to an array of nested pairs. a[0] is a key, a[1] is a value
-      songs_by_play_count = songs_with_play_count_pair.sort do |a, b| 
-        b[1].metadata['play_count'].to_i <=> a[1].metadata['play_count'].to_i
-      end
-      songs_first_nested_array = songs_by_play_count.first(3)
-      songs_first = {}
-      songs_first_nested_array.each do |pair_array|
-        songs_first[pair_array[0]] = songs_first[pair_array[1]]
-      end
-      songs_first
+      find_songs_by_value_for_key('play_count', true, false)     
     end
 
     # Returns the number of playlists in the library
