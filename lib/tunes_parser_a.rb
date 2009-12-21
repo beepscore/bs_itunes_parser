@@ -127,22 +127,22 @@ module ItunesParser
         # reject song if it doesn't have a_key or if the value is nil
         (!song.metadata.has_key?(a_key)) or (song.metadata[a_key] == nil)
       end
+
       # hash.sort returns an array of nested pairs. a[0] is a key, a[1] is a value
       songs_by_value_for_key = songs_with_key_value_pair.sort do |a, b| 
+        a_term = a[1].metadata[a_key]
+        b_term = b[1].metadata[a_key]
+        if sort_as_number
+          a_term = a_term.to_f
+          b_term = b_term.to_f
+        end
         if order_is_ascending
-          if sort_as_number
-            a[1].metadata[a_key].to_f <=> b[1].metadata[a_key].to_f
-          else
-            a[1].metadata[a_key] <=> b[1].metadata[a_key]
-          end
+          a_term <=> b_term
         else # order is descending
-          if sort_as_number
-            b[1].metadata[a_key].to_f <=> a[1].metadata[a_key].to_f
-          else
-            b[1].metadata[a_key] <=> a[1].metadata[a_key]
-          end
+          b_term <=> a_term
         end
       end
+
       songs_first_nested_array = songs_by_value_for_key.first(3)
       songs_first = {}
       songs_first_nested_array.each do |pair_array|
